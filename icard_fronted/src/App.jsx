@@ -1,11 +1,25 @@
-import { Button, Container, Card } from 'react-bootstrap'
-import "./styles/main.scss"
+import { ToastContainer } from 'react-toastify'
+import { Navigation } from './routes'
+import { AuthProvider } from './context'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function App() {
   return (
-    <div className="container mt-5">
-      <h1 className="titulo-restaurante">Restaurante iCard</h1>
-      <button className="btn btn-primary">Ver menú</button>
-    </div>
+    <AuthProvider>
+      <Navigation />
+
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
+    </AuthProvider>
   )
 }
