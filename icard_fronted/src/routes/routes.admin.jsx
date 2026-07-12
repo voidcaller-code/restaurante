@@ -1,8 +1,17 @@
 import { AdminLayout } from '../layouts'
-import { LoginAdmin } from '../pages/Admin'
+import {
+  LoginAdmin,
+  UsersAdmin,
+  CategoriesAdmin,
+  ProductAdmin,
+  TablesAdmin,
+  OrdersAdmin,
+  TableDetailsAdmin,
+  PaymentsHistory,
+} from '../pages/Admin'
 import { Error404 } from '../pages'
 
-export const routesAdmin = [
+const routesAdmin = [
   {
     path: '/admin/login',
     element: <LoginAdmin />,
@@ -10,25 +19,41 @@ export const routesAdmin = [
   {
     path: '/admin',
     element: <AdminLayout />,
-    // children: [
-    //   {
-    //     index: true,
-    //     element: <h2>Dashboard administrador</h2>,
-    //   },
-    //   {
-    //     path: '*',
-    //     element: <Error404 />,
-    //   },
-    // ],
+    children: [
+      {
+        index: true,
+        element: <OrdersAdmin />,
+      },
+      {
+        path: 'users',
+        element: <UsersAdmin />,
+      },
+      {
+        path: 'categories',
+        element: <CategoriesAdmin />,
+      },
+      {
+        path: 'products',
+        element: <ProductAdmin />,
+      },
+      {
+        path: 'tables',
+        element: <TablesAdmin />,
+      },
+      {
+        path: 'tables/:id',
+        element: <TableDetailsAdmin />,
+      },
+      {
+        path: 'payments-history',
+        element: <PaymentsHistory />,
+      },
+      {
+        path: '*',
+        element: <Error404 />,
+      },
+    ],
   },
 ]
 
-// const routesAdmin = [
-//   {
-//     path: "/admin",
-//     layout: AdminLayout,
-//     component: LoginAdmin,
-//   },
-// ];
-
-export default routesAdmin;
+export default routesAdmin

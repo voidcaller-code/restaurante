@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-//import './styles/main.scss'
+import './styles/main.scss'
 
 import App from './App.jsx'
 

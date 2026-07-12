@@ -28,7 +28,7 @@ export function useUser() {
     try {
       setLoading(true);
       const response = await getUsersApi(auth?.token);
-      setUsers(response);
+      setUsers(response || []);
     } catch (error) {
       setError(error);
     } finally {

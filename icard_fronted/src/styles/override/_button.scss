@@ -1,0 +1,28 @@
+.btn-primary {
+  background-color: #0098d3;
+  border-color: #0098d3;
+  color: #fff;
+  border-radius: 8px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #0087bd;
+    border-color: #0087bd;
+    color: #fff;
+  }
+}
+
+.btn-outline-primary {
+  border-color: #0098d3;
+  color: #0098d3;
+  border-radius: 8px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #0098d3;
+    border-color: #0098d3;
+    color: #fff;
+  }
+}

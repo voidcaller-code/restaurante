@@ -1,10 +1,3 @@
-.client-layout-bg {
-  background-color: #d9d9d9;
-  min-height: 100vh;
-  min-width: 100vw;
-  padding: 1rem 0;
-}
-
 .client-layout {
   background-color: #fff;
   padding: 1rem;
@@ -16,6 +9,7 @@
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1.25rem;
+    flex-wrap: wrap;
   }
 
   &__logo {

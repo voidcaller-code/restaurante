@@ -1,17 +1,45 @@
-import {ClientLayout} from "../layouts"
-import {Home} from "../pages/Client"
+import { ClientLayout, BasicLayout } from '../layouts'
+import {
+  SelectTable,
+  Categories,
+  Products,
+  Cart,
+  OrdersHistory,
+} from '../pages/Client'
 
 const routesClient = [
-    {
-        path: "/",
+  {
+    path: '/',
+    element: <BasicLayout />,
+    children: [
+      {
+        index: true,
+        element: <SelectTable />,
+      },
+      {
+        path: 'client/:tableNumber',
         element: <ClientLayout />,
-        // children: [
-        //     {
-        //         index: true,
-        //         element: <Home />,
-        //     },
-        // ],
-    },
+        children: [
+          {
+            index: true,
+            element: <Categories />,
+          },
+          {
+            path: 'cart',
+            element: <Cart />,
+          },
+          {
+            path: 'orders',
+            element: <OrdersHistory />,
+          },
+          {
+            path: ':idCategory',
+            element: <Products />,
+          },
+        ],
+      },
+    ],
+  },
 ]
 
-export default routesClient;
+export default routesClient

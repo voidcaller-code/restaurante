@@ -1,0 +1,35 @@
+.list-product-cart {
+  &__product {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__image {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+  }
+
+  &__remove {
+    border: 0;
+    background-color: transparent;
+    color: #dc3545;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

@@ -2,24 +2,22 @@ import { useEffect } from 'react'
 import { Link, Outlet, useNavigate, useParams } from 'react-router'
 import { Button, Container } from 'react-bootstrap'
 import './ClientLayout.scss'
+import { FaShoppingCart, FaListAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export function ClientLayout() {
   const { tableNumber } = useParams()
   const navigate = useNavigate()
 
-  // Más adelante, cuando creemos el hook useTable, activamos esto:
-  // const { isExistTable } = useTable()
+ 
+  const { isExistTable } = useTable()
 
   useEffect(() => {
-    // Por ahora no validamos la mesa para no romper el proyecto.
-    // Cuando tengas backend/hook:
-    //
-    // const validateTable = async () => {
-    //   const exist = await isExistTable(tableNumber)
-    //   if (!exist) closeTable()
-    // }
-    //
-    // validateTable()
+    
+    const validateTable = async () => {
+      const exist = await isExistTable(tableNumber)
+      if (!exist) closeTable()
+    }
+        validateTable()
   }, [tableNumber])
 
   const closeTable = () => {
@@ -45,18 +43,18 @@ export function ClientLayout() {
           <span>
             {tableNumber ? `Mesa ${tableNumber}` : 'Restaurante'}
           </span>
-
+          
           <div className="client-layout__actions">
             <Button variant="outline-primary" size="sm" onClick={goToCart}>
-              🛒
+              <FaShoppingCart />
             </Button>
 
             <Button variant="outline-secondary" size="sm" onClick={goToOrders}>
-              📋
+              <FaListAlt />
             </Button>
 
             <Button variant="outline-danger" size="sm" onClick={closeTable}>
-              Salir
+              <FaSignOutAlt /> Salir
             </Button>
           </div>
         </div>
