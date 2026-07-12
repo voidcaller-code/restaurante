@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'rest_framework',
     'drf_spectacular',
 ]
@@ -140,3 +141,6 @@ SPECTACULAR_SETTINGS = {
         'name': 'MIT License'
     }
 }
+
+# USERS - debe cambiarse antes de la primera migración
+AUTH_USER_MODEL = 'users.User' # Usar el modelo personalizado de usuarios users que creamos

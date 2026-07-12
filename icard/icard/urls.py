@@ -6,4 +6,7 @@ urlpatterns = [
 
     # Documentation
     path('api/v1/', include('document.urls')),
+
+    # Users
+    path('api/v1/', include('users.urls')),
 ]
