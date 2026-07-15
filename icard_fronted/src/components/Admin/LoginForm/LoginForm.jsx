@@ -2,6 +2,7 @@ import { Button, Form } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
 
 import { loginApi } from '../../../api/user'
 import { useAuth } from '../../../hooks'
@@ -10,6 +11,7 @@ import './LoginForm.scss'
 
 export function LoginForm() {
   const { login } = useAuth()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -24,8 +26,10 @@ export function LoginForm() {
         await login(access)
 
         toast.success('Sesión iniciada correctamente')
+
+        navigate('/admin')
       } catch (error) {
-        toast.error(error.message || 'Error al iniciar sesión')
+        toast.error('Usuario o contraseña incorrectos')
       }
     },
   })

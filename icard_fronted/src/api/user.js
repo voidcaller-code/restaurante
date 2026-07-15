@@ -2,19 +2,19 @@ import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function loginApi(formValue) {
-  const url = `${BASE_API}/api/auth/login/`;
+  const url = `${BASE_API}/api/v1/auth/login/`;
 
   return apiFetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formValue),
+    body: JSON.stringify(formValue), // Datos que se enviarán en el cuerpo de la solicitud
   });
 }
 
 export async function getMeApi(token) {
-  const url = `${BASE_API}/api/auth/me/`;
+  const url = `${BASE_API}/api/v1/auth/me/`;
 
   return apiFetch(url, {
     headers: {
@@ -24,7 +24,7 @@ export async function getMeApi(token) {
 }
 
 export async function getUsersApi(token) {
-  const url = `${BASE_API}/api/users/`;
+  const url = `${BASE_API}/api/v1/users/`;
 
   return apiFetch(url, {
     headers: {
@@ -34,7 +34,7 @@ export async function getUsersApi(token) {
 }
 
 export async function addUserApi(data, token) {
-  const url = `${BASE_API}/api/users/`;
+  const url = `${BASE_API}/api/v1/users/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -47,7 +47,7 @@ export async function addUserApi(data, token) {
 }
 
 export async function updateUserApi(id, data, token) {
-  const url = `${BASE_API}/api/users/${id}/`;
+  const url = `${BASE_API}/api/v1/users/${id}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -60,7 +60,7 @@ export async function updateUserApi(id, data, token) {
 }
 
 export async function deleteUserApi(id, token) {
-  const url = `${BASE_API}/api/users/${id}/`;
+  const url = `${BASE_API}/api/v1/users/${id}/`;
 
   return apiFetch(url, {
     method: "DELETE",

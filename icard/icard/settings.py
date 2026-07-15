@@ -1,23 +1,26 @@
 from pathlib import Path
-from decouple import config # Variables de entorno
+from decouple import config, Csv # Variables de entorno
+from datetime import timedelta # JWT
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config(
+    "DEBUG",
+    default=False,
+    cast=bool
+)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    cast=Csv()
+)
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,13 +29,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
     'rest_framework',
     'drf_spectacular',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'users'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,6 +46,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Configuración CORS
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    cast=Csv()
+)
+
+CORS_URLS_REGEX = r"^/api/v1/.*$"
+
 
 ROOT_URLCONF = 'icard.urls'
 
@@ -116,16 +131,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# USERS - debe cambiarse antes de la primera migración
+AUTH_USER_MODEL = 'users.User' # Usar el modelo personalizado de usuarios users que creamos
 
 # Configuraciones de DRF
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 # Configuraciones de drf-spectacular
@@ -142,5 +158,11 @@ SPECTACULAR_SETTINGS = {
     }
 }
 
-# USERS - debe cambiarse antes de la primera migración
-AUTH_USER_MODEL = 'users.User' # Usar el modelo personalizado de usuarios users que creamos
+# Congiguraciones de JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    
+    'ROTATE_REFRESH_TOKENS': True,                   
+    'BLACKLIST_AFTER_ROTATION': True,               
+    'AUTH_HEADER_TYPES': ('Bearer',),               
+}

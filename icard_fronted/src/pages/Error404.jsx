@@ -18,14 +18,14 @@ export function Error404() {
         </p>
 
         <div className="error-404__actions">
-          <Link to="/">
+          {/* <Link to="/">
             <Button variant="primary">
               Volver al inicio
             </Button>
-          </Link>
+          </Link> */}
 
           <Link to="/admin">
-            <Button variant="outline-secondary">
+            <Button variant="primary">
               Ir al panel admin
             </Button>
           </Link>
