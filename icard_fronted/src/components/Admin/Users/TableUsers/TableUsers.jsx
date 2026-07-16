@@ -14,7 +14,7 @@ export function TableUsers(props) {
       hover
       className="table-users-admin align-middle"
     >
-      <thead>
+      <thead className="text-center">
         <tr>
           <th>Username</th>
           <th>Email</th>
@@ -22,13 +22,13 @@ export function TableUsers(props) {
           <th>Apellidos</th>
           <th>Activo</th>
           <th>Staff</th>
-          <th className="text-end">Acciones</th>
+          <th>Acciones</th>
         </tr>
       </thead>
 
-      <tbody>
-        {users.length > 0 ? (
-          users.map((user) => (
+      <tbody className="table-users-admin__tbody text-center">
+        {users.retData.length > 0 ? (
+          users.retData.map((user) => (
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
@@ -76,8 +76,9 @@ function Actions(props) {
   const { user, updateUser, onDeleteUser } = props
 
   return (
-    <div className="table-users-admin__actions">
-      <Button
+    <div className="text-center">
+      <Button 
+        className="me-2"
         type="button"
         variant="warning"
         size="sm"
@@ -87,6 +88,7 @@ function Actions(props) {
       </Button>
 
       <Button
+        className="me-2"
         type="button"
         variant="danger"
         size="sm"

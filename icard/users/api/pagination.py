@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 class CustomPageNumberPagination(PageNumberPagination):
     # Cantidad predeterminada de registros por página
-    page_size = 3
+    page_size = 10
 
     # Permite cambiar la cantidad desde la URL:
     page_size_query_param = "page_size"

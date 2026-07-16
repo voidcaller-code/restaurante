@@ -92,7 +92,7 @@ function MenuLeft() {
           <span>Productos</span>
         </NavLink>
 
-        {auth?.me?.is_staff && (
+        {auth?.me?.retData?.is_staff && (
           <NavLink
             to="/admin/users"
             className={({ isActive }) =>

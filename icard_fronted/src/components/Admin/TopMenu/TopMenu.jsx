@@ -9,11 +9,11 @@ export function TopMenu() {
   const { auth, logout } = useAuth()
 
   const renderName = () => {
-    if (auth?.me?.first_name && auth?.me?.last_name) {
-      return `${auth.me.first_name} ${auth.me.last_name}`
+    if (auth?.me?.retData?.first_name && auth?.me?.retData?.last_name) {
+      return `${auth.me.retData.first_name} ${auth.me.retData.last_name}`
     }
 
-    return auth?.me?.email || 'Administrador'
+    return auth?.me?.retData?.email || 'Administrador'
   }
 
   return (
