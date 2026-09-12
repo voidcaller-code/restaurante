@@ -77,7 +77,7 @@ export function UsersAdmin() {
         />
       )}
 
-      <ModalBasic show={showModal} onClose={openCloseModal} title={titleModal}>
+      <ModalBasic show={showModal} onClose={openCloseModal} title={titleModal} size="large">
         {contentModal}
       </ModalBasic>
     </>

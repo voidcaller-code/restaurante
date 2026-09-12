@@ -16,6 +16,7 @@ export function TableUsers(props) {
     >
       <thead className="text-center">
         <tr>
+          <th>ID</th>
           <th>Username</th>
           <th>Email</th>
           <th>Nombre</th>
@@ -30,6 +31,7 @@ export function TableUsers(props) {
         {users.retData.length > 0 ? (
           users.retData.map((user) => (
             <tr key={user.id}>
+              <td>{user.id}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.first_name}</td>
