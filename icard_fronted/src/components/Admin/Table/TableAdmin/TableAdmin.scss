@@ -1,0 +1,48 @@
+.table-admin {
+  position: relative;
+  flex: 0 1 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #212529;
+  text-decoration: none;
+  padding: 1rem;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  &__badge {
+    position: absolute;
+    top: 30px;
+    font-size: 0.95rem;
+
+    &--payment {
+      top: 60px;
+    }
+  }
+
+  &__icon {
+    width: 200px;
+    height: 200px;
+    color: #6c757d;
+
+    &--busy {
+      color: #bb7900;
+    }
+
+    &--pending {
+      color: #0094e3;
+    }
+
+    &--pending-payment {
+      color: #198754;
+    }
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+}

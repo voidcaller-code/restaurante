@@ -1,0 +1,17 @@
+.table-category-admin {
+  &__image-cell {
+    width: 130px;
+  }
+
+  &__image {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}

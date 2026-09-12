@@ -1,0 +1,22 @@
+.tables-list-admin {
+  position: relative;
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__reload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

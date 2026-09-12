@@ -1,0 +1,28 @@
+.list-categories-client {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  &__category {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #000;
+    margin: 10px 0;
+    padding: 8px;
+    background-color: #fff;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  &__image {
+    width: 90px;
+    height: 70px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+}

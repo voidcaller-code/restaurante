@@ -1,0 +1,29 @@
+.table-product-admin {
+  &__image-cell {
+    width: 110px;
+  }
+
+  &__image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  &__icon {
+    font-size: 1.1rem;
+
+    &--active {
+      color: #198754;
+    }
+
+    &--inactive {
+      color: #dc3545;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
