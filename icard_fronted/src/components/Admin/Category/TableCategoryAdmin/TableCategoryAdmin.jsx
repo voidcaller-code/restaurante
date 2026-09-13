@@ -1,8 +1,16 @@
 import { Button, Image, Table } from 'react-bootstrap'
+import { FaEdit, FaTrash } from 'react-icons/fa'
+
 import './TableCategoryAdmin.scss'
 
 export function TableCategoryAdmin(props) {
-  const { categories = [], updateCategory, deleteCategory } = props
+  const {
+    categories = { retData: [] },
+    updateCategory,
+    deleteCategory,
+  } = props
+
+  const categoryList = categories?.retData || []
 
   return (
     <Table
@@ -12,18 +20,34 @@ export function TableCategoryAdmin(props) {
       hover
       className="table-category-admin align-middle"
     >
-      <thead>
+      <thead className="text-center">
         <tr>
-          <th>Imagen</th>
-          <th>Categoría</th>
-          <th className="text-end">Acciones</th>
+          <th className="table-category-admin__id-cell">
+            ID
+          </th>
+
+          <th className="table-category-admin__image-cell">
+            Imagen
+          </th>
+
+          <th>
+            Categoría
+          </th>
+
+          <th className="table-category-admin__actions-cell">
+            Acciones
+          </th>
         </tr>
       </thead>
 
-      <tbody>
-        {categories.length > 0 ? (
-          categories.map((category, index) => (
-            <tr key={category.id || index}>
+      <tbody className="text-center">
+        {categoryList.length > 0 ? (
+          categoryList.map((category) => (
+            <tr key={category.id}>
+              <td className="table-category-admin__id-cell">
+                {category.id}
+              </td>
+
               <td className="table-category-admin__image-cell">
                 {category.image ? (
                   <Image
@@ -37,9 +61,11 @@ export function TableCategoryAdmin(props) {
                 )}
               </td>
 
-              <td>{category.title}</td>
+              <td>
+                {category.title}
+              </td>
 
-              <td className="text-end">
+              <td className="table-category-admin__actions-cell">
                 <Actions
                   category={category}
                   updateCategory={updateCategory}
@@ -50,7 +76,10 @@ export function TableCategoryAdmin(props) {
           ))
         ) : (
           <tr>
-            <td colSpan="3" className="text-center">
+            <td
+              colSpan="4"
+              className="text-center"
+            >
               No hay categorías registradas.
             </td>
           </tr>
@@ -60,8 +89,13 @@ export function TableCategoryAdmin(props) {
   )
 }
 
+// Recuperamos en el actions lo que viene de CategoriesAdmin
 function Actions(props) {
-  const { category, updateCategory, deleteCategory } = props
+  const {
+    category,
+    updateCategory,
+    deleteCategory,
+  } = props
 
   return (
     <div className="table-category-admin__actions">
@@ -71,7 +105,7 @@ function Actions(props) {
         size="sm"
         onClick={() => updateCategory(category)}
       >
-        Editar
+        <FaEdit />
       </Button>
 
       <Button
@@ -80,7 +114,7 @@ function Actions(props) {
         size="sm"
         onClick={() => deleteCategory(category)}
       >
-        Eliminar
+        <FaTrash />
       </Button>
     </div>
   )

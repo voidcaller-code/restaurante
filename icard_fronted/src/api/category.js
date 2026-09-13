@@ -2,7 +2,7 @@ import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function getCategoriesApi() {
-  const url = `${BASE_API}/api/categories/`;
+  const url = `${BASE_API}/api/v1/categories/`;
   return apiFetch(url);
 }
 
@@ -11,7 +11,7 @@ export async function addCategoryApi(data, token) {
   formData.append("image", data.image);
   formData.append("title", data.title);
 
-  const url = `${BASE_API}/api/categories/`;
+  const url = `${BASE_API}/api/v1/categories/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -30,7 +30,7 @@ export async function updateCategoryApi(id, data, token) {
     formData.append("image", data.image);
   }
 
-  const url = `${BASE_API}/api/categories/${id}/`;
+  const url = `${BASE_API}/api/v1/categories/${id}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -42,7 +42,7 @@ export async function updateCategoryApi(id, data, token) {
 }
 
 export async function deleteCategoryApi(id, token) {
-  const url = `${BASE_API}/api/categories/${id}/`;
+  const url = `${BASE_API}/api/v1/categories/${id}/`;
 
   return apiFetch(url, {
     method: "DELETE",

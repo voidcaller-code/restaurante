@@ -21,7 +21,7 @@ export function AddEditCategoryForm(props) {
     onSubmit: async (formValue) => {
       try {
         if (category) {
-          await updateCategory(category.id, formValue)
+          await updateCategory(category.id, formValue) // La función es asíncrona por lo que la llamamos con await
         } else {
           await addCategory(formValue)
         }
@@ -40,7 +40,7 @@ export function AddEditCategoryForm(props) {
     if (!file) return
 
     await formik.setFieldValue('image', file)
-    setPreviewImage(URL.createObjectURL(file))
+    setPreviewImage(URL.createObjectURL(file)) // conertimos la imagen a url
   }
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -100,7 +100,7 @@ export function AddEditCategoryForm(props) {
             alt="Vista previa de categoría"
             fluid
             thumbnail
-            className="add-edit-category-form__image"
+            className="add-edit-category-form__image d-block mx-auto mt-3"
           />
         )}
       </Form.Group>

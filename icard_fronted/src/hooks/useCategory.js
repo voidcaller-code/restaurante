@@ -16,8 +16,8 @@ export function useCategory() {
 
   const getCategories = async () => {
     try {
-      setLoading(true)
-      const response = await getCategoriesApi()
+      setLoading(true) // Cuando se esta cargando y termine la peticion
+      const response = await getCategoriesApi() // Trae el listado de categorias
       setCategories(response)
     } catch (error) {
       setError(error)
@@ -59,6 +59,7 @@ export function useCategory() {
     }
   }
 
+  // Retorna el listado de categorias, y los estados
   return {
     loading,
     error,
