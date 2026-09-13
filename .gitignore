@@ -37,6 +37,10 @@ htmlcov/
 .pytest_cache/
 coverage/
 
+# Archivos subidos por usuarios
+/icard/uploads/*
+!/icard/uploads/.gitkeep
+
 # =========================
 # Frontend React / Vite
 # =========================
