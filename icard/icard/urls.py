@@ -9,4 +9,7 @@ urlpatterns = [
 
     # Users
     path('api/v1/', include('users.urls')),
+
+    # Categories
+    path('api/v1/', include('categories.urls')),
 ]
