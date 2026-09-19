@@ -13,6 +13,9 @@ urlpatterns = [
 
     # Categories
     path('api/v1/', include('categories.urls')),
+
+    # Products
+    path('api/v1/', include('products.urls')),
 ]
 
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
