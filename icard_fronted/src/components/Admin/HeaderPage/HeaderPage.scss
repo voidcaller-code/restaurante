@@ -1,0 +1,17 @@
+.header-page-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  > h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
