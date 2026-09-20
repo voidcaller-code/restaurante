@@ -1,0 +1,29 @@
+.modal-confirm {
+  .modal-content {
+    border-radius: 0;
+  }
+
+  .modal-header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .modal-title {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modal-footer {
+    display: flex;
+    padding: 0;
+    border-top: 0;
+    margin-bottom: 10px;
+
+    button {
+      width: 50%;
+      margin: 0;
+      border-radius: 0;
+      height: 50px;
+    }
+  }
+}
