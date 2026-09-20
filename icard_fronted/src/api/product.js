@@ -2,7 +2,7 @@ import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function getProductsApi() {
-  const url = `${BASE_API}/api/products/`;
+  const url = `${BASE_API}/api/v1/products/`;
   return apiFetch(url);
 }
 
@@ -18,7 +18,7 @@ export async function addProductApi(data, token) {
     formData.append("image", data.image);
   }
 
-  const url = `${BASE_API}/api/products/`;
+  const url = `${BASE_API}/api/v1/products/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -41,7 +41,7 @@ export async function updateProductApi(id, data, token) {
     formData.append("image", data.image);
   }
 
-  const url = `${BASE_API}/api/products/${id}/`;
+  const url = `${BASE_API}/api/v1/products/${id}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -53,7 +53,7 @@ export async function updateProductApi(id, data, token) {
 }
 
 export async function deleteProductApi(id, token) {
-  const url = `${BASE_API}/api/products/${id}/`;
+  const url = `${BASE_API}/api/v1/products/${id}/`;
 
   return apiFetch(url, {
     method: "DELETE",
@@ -64,13 +64,13 @@ export async function deleteProductApi(id, token) {
 }
 
 export async function getProductByIdApi(id) {
-  const url = `${BASE_API}/api/products/${id}/`;
+  const url = `${BASE_API}/api/v1/products/${id}/`;
   return apiFetch(url);
 }
 
 export async function getProductsByCategoryApi(idCategory) {
   const categoryFilter = `category=${idCategory}`;
-  const url = `${BASE_API}/api/products/?${categoryFilter}`;
+  const url = `${BASE_API}/api/v1/products/?${categoryFilter}`;
 
   return apiFetch(url);
 }

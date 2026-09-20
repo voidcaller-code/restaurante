@@ -14,21 +14,23 @@ export function TableProductAdmin(props) {
       hover
       className="table-product-admin align-middle"
     >
-      <thead>
+      <thead className="text-center">
         <tr>
-          <th>Imagen</th>
+          <th className="table-product-admin__id-cell">ID</th>
+          <th className="table-product-admin__image-cell">Imagen</th>
           <th>Producto</th>
           <th>Precio</th>
           <th>Categoría</th>
           <th>Activo</th>
-          <th className="text-end">Acciones</th>
+          <th className="table-product-admin__actions-cell">Acciones</th>
         </tr>
       </thead>
 
-      <tbody>
-        {products.length > 0 ? (
-          products.map((product) => (
+      <tbody className="text-center">
+        {products.retData.length > 0 ? (
+          products.retData.map((product) => (
             <tr key={product.id}>
+              <td>{product.id}</td>
               <td className="table-product-admin__image-cell">
                 {product.image ? (
                   <Image
@@ -43,7 +45,7 @@ export function TableProductAdmin(props) {
               </td>
 
               <td>{product.title}</td>
-              <td>{product.price} €</td>
+              <td>{product.price} $</td>
               <td>{product.category_data?.title || 'Sin categoría'}</td>
 
               <td>
@@ -54,7 +56,7 @@ export function TableProductAdmin(props) {
                 )}
               </td>
 
-              <td className="text-end">
+              <td className="table-product-admin__actions-cell">
                 <Actions
                   product={product}
                   updateProduct={updateProduct}

@@ -15,6 +15,10 @@ export function AddEditProductForm(props) {
   const [previewImage, setPreviewImage] = useState(product?.image || null)
 
   const { categories = [], getCategories } = useCategory()
+  const categoryList = Array.isArray(categories)
+  ? categories
+  : categories?.retData || []
+
   const { addProduct, updateProduct } = useProduct()
 
   useEffect(() => {
@@ -95,22 +99,30 @@ export function AddEditProductForm(props) {
           {formik.errors.price}
         </Form.Control.Feedback>
       </Form.Group>
-
+      
       <Form.Group className="mb-3">
         <Form.Label>Categoría</Form.Label>
 
         <Form.Select
           name="category"
           value={formik.values.category}
-          onChange={(event) =>
-            formik.setFieldValue('category', Number(event.target.value))
-          }
+          onChange={(event) => {
+            const value = event.target.value
+
+            formik.setFieldValue(
+              'category',
+              value === '' ? '' : Number(value)
+            )
+          }}
           isInvalid={Boolean(formik.errors.category)}
         >
           <option value="">Seleccione una categoría</option>
 
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
+          {categoryList.map((category) => (
+            <option
+              key={category.id}
+              value={category.id}
+            >
               {category.title}
             </option>
           ))}
@@ -120,6 +132,7 @@ export function AddEditProductForm(props) {
           {formik.errors.category}
         </Form.Control.Feedback>
       </Form.Group>
+      
 
       <Form.Group className="mb-3">
         <Form.Check

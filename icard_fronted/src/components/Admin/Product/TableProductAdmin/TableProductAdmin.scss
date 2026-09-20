@@ -1,14 +1,10 @@
 .table-product-admin {
-  &__image-cell {
-    width: 110px;
+  &__id-cell {
+    width: 70px;
+    text-align: center;
+    white-space: nowrap;
   }
-
-  &__image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-  }
-
+  
   &__icon {
     font-size: 1.1rem;
 
@@ -21,9 +17,28 @@
     }
   }
 
+  &__image-cell {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__image {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  &__actions-cell {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
   &__actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
   }
 }
