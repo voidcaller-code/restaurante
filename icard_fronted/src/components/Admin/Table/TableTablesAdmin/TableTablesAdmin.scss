@@ -1,0 +1,11 @@
+.table-tables-admin {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  &__qr {
+    text-align: center;
+  }
+}
