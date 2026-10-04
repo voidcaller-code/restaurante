@@ -20,7 +20,8 @@ class Table(models.Model):
     )
 
     def __str__(self):
-        return self.tipo
+        return f"Mesa {self.id} - {self.get_tipo_display()} - Capacidad {self.capacity}"
+
 
     class Meta:
         verbose_name = 'Mesa'

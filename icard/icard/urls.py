@@ -19,6 +19,9 @@ urlpatterns = [
 
     # Tables
     path('api/v1/', include('tables.urls')),
+
+    # Orders
+    path('api/v1/', include('orders.urls')),
 ]
 
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
