@@ -17,7 +17,7 @@ export function useOrder() {
     try {
       setLoading(true);
       const response = await getOrdersByTableApi(idTable, status, ordering);
-      setOrders(response);
+      setOrders(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {

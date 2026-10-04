@@ -46,9 +46,9 @@ export function TablesListAdmin(props) {
       </div>
 
       <div className="tables-list-admin__list">
-        {tables.length > 0 ? (
-          tables.map((table) => (
-            <TableAdmin key={table.id || table.number} table={table} reload={reload} />
+        {tables.retData.length > 0 ? (
+          tables.retData.map((table) => (
+            <TableAdmin key={table.id} table={table} reload={reload} />
           ))
         ) : (
           <p className="text-muted">No hay mesas registradas.</p>

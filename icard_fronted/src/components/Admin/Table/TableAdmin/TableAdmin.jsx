@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react'
 import { Badge } from 'react-bootstrap'
 import { Link } from 'react-router'
-import { MdTableRestaurant } from 'react-icons/md'
+import { MdTableBar } from 'react-icons/md'
 
 import { getOrdersByTableApi } from '../../../../api/orders'
 import { ORDER_STATUS } from '../../../../utils/constants'
 import { usePayment } from '../../../../hooks'
 
 import './TableAdmin.scss'
-// table.svg
 
 export function TableAdmin(props) {
   const { table, reload } = props
 
-  const [orders, setOrders] = useState([])
+  const [pendingOrdersCount, setPendingOrdersCount] = useState(0)
   const [tableBusy, setTableBusy] = useState(false)
   const [pendingPayment, setPendingPayment] = useState(false)
 
@@ -27,10 +26,10 @@ export function TableAdmin(props) {
           ORDER_STATUS.PENDING
         )
 
-        setOrders(response || [])
+        setPendingOrdersCount(response?.retTotal ?? 0)
       } catch (error) {
         console.error(error)
-        setOrders([])
+        setPendingOrdersCount(0)
       }
     }
 
@@ -44,8 +43,7 @@ export function TableAdmin(props) {
           table.id,
           ORDER_STATUS.DELIVERED
         )
-
-        setTableBusy(response?.length > 0)
+        setTableBusy((response?.retTotal ?? 0) > 0)
       } catch (error) {
         console.error(error)
         setTableBusy(false)
@@ -72,7 +70,7 @@ export function TableAdmin(props) {
 
   const iconClassName = [
     'table-admin__icon',
-    orders.length > 0 ? 'table-admin__icon--pending' : '',
+    pendingOrdersCount > 0 ? 'table-admin__icon--pending' : '',
     tableBusy ? 'table-admin__icon--busy' : '',
     pendingPayment ? 'table-admin__icon--pending-payment' : '',
   ]
@@ -81,9 +79,9 @@ export function TableAdmin(props) {
 
   return (
     <Link className="table-admin" to={`/admin/tables/${table.id}`}>
-      {orders.length > 0 && (
+      {pendingOrdersCount > 0 && (
         <Badge bg="warning" text="dark" pill className="table-admin__badge">
-          {orders.length}
+          {pendingOrdersCount}
         </Badge>
       )}
 
@@ -93,9 +91,13 @@ export function TableAdmin(props) {
         </Badge>
       )}
 
-      <MdTableRestaurant className={iconClassName} />
+      <MdTableBar
+        role="img"
+        aria-label={`Mesa ${table.id}`}
+        className={iconClassName}
+      />
 
-      <p>Mesa {table.number}</p>
+      <p>Mesa {table.id}</p>
     </Link>
   )
 }

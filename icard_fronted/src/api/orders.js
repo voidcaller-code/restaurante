@@ -6,13 +6,13 @@ export async function getOrdersByTableApi(idTable, status = "", ordering = "") {
   const statusFilter = `status=${status}`;
   const closeFilter = "close=False";
 
-  const url = `${BASE_API}/api/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}`;
+  const url = `${BASE_API}/api/v1/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}`;
 
   return apiFetch(url);
 }
 
 export async function checkDeliveredOrderApi(id) {
-  const url = `${BASE_API}/api/orders/${id}/`;
+  const url = `${BASE_API}/api/v1/orders/${id}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -26,7 +26,7 @@ export async function checkDeliveredOrderApi(id) {
 }
 
 export async function addOrderToTableApi(idTable, idProduct) {
-  const url = `${BASE_API}/api/orders/`;
+  const url = `${BASE_API}/api/v1/orders/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -42,7 +42,7 @@ export async function addOrderToTableApi(idTable, idProduct) {
 }
 
 export async function addPaymentToOrderApi(idOrder, idPayment) {
-  const url = `${BASE_API}/api/orders/${idOrder}/`;
+  const url = `${BASE_API}/api/v1/orders/${idOrder}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -56,7 +56,7 @@ export async function addPaymentToOrderApi(idOrder, idPayment) {
 }
 
 export async function closeOrderApi(idOrder) {
-  const url = `${BASE_API}/api/orders/${idOrder}/`;
+  const url = `${BASE_API}/api/v1/orders/${idOrder}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -71,7 +71,7 @@ export async function closeOrderApi(idOrder) {
 
 export async function getOrdersByPaymentApi(idPayment) {
   const paymentFilter = `payment=${idPayment}`;
-  const url = `${BASE_API}/api/orders/?${paymentFilter}`;
+  const url = `${BASE_API}/api/v1/orders/?${paymentFilter}`;
 
   return apiFetch(url);
 }
