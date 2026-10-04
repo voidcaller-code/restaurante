@@ -33,19 +33,42 @@ export function AddEditTableForm(props) {
   return (
     <Form className="add-edit-table-form" onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
-        <Form.Label>Número de la mesa</Form.Label>
+        <Form.Label>Tipo de mesa</Form.Label>
+
+        <Form.Select
+          name="tipo"
+          value={formik.values.tipo}
+          onChange={formik.handleChange}
+          isInvalid={Boolean(formik.errors.tipo)}
+        >
+          <option value="">Selecciona un tipo de mesa</option>
+          <option value="NI">Niños</option>
+          <option value="ES">Estándar</option>
+          <option value="VIP">VIP</option>
+        </Form.Select>
+
+        <Form.Control.Feedback type="invalid">
+          {formik.errors.tipo}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Capacidad</Form.Label>
 
         <Form.Control
-          name="number"
+          name="capacity"
           type="number"
-          placeholder="Número de la mesa"
-          value={formik.values.number}
+          min="1"
+          max="10"
+          step="1"
+          placeholder="Cantidad de personas"
+          value={formik.values.capacity}
           onChange={formik.handleChange}
-          isInvalid={Boolean(formik.errors.number)}
+          isInvalid={Boolean(formik.errors.capacity)}
         />
 
         <Form.Control.Feedback type="invalid">
-          {formik.errors.number}
+          {formik.errors.capacity}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -58,14 +81,21 @@ export function AddEditTableForm(props) {
 
 function initialValues(data) {
   return {
-    number: data?.number || '',
+    tipo: data?.tipo ?? 'ES',
+    capacity: data?.capacity ?? '',
   }
 }
 
 function validationSchema() {
   return Yup.object({
-    number: Yup.number()
-      .typeError('El número de la mesa debe ser un número')
-      .required('El número de la mesa es obligatorio'),
+    tipo: Yup.string()
+      .oneOf(['NI', 'ES', 'VIP'], 'Selecciona un tipo de mesa válido')
+      .required('El tipo de mesa es obligatorio'),
+    capacity: Yup.number()
+      .typeError('La capacidad debe ser un número')
+      .integer('La capacidad debe ser un número entero')
+      .min(1, 'La capacidad debe ser mayor que cero')
+      .max(10, 'La capacidad no puede ser mayor que 10')
+      .required('La capacidad es obligatoria'),
   })
 }

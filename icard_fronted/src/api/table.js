@@ -2,7 +2,7 @@ import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function getTablesApi(token) {
-  const url = `${BASE_API}/api/tables/`;
+  const url = `${BASE_API}/api/v1/tables/`;
 
   return apiFetch(url, {
     headers: {
@@ -12,7 +12,7 @@ export async function getTablesApi(token) {
 }
 
 export async function addTableApi(data, token) {
-  const url = `${BASE_API}/api/tables/`;
+  const url = `${BASE_API}/api/v1/tables/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -25,7 +25,7 @@ export async function addTableApi(data, token) {
 }
 
 export async function updateTableApi(id, data, token) {
-  const url = `${BASE_API}/api/tables/${id}/`;
+  const url = `${BASE_API}/api/v1/tables/${id}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -38,7 +38,7 @@ export async function updateTableApi(id, data, token) {
 }
 
 export async function deleteTableApi(id, token) {
-  const url = `${BASE_API}/api/tables/${id}/`;
+  const url = `${BASE_API}/api/v1/tables/${id}/`;
 
   return apiFetch(url, {
     method: "DELETE",
@@ -49,13 +49,13 @@ export async function deleteTableApi(id, token) {
 }
 
 export async function getTableApi(idTable) {
-  const url = `${BASE_API}/api/tables/${idTable}/`;
+  const url = `${BASE_API}/api/v1/tables/${idTable}/`;
   return apiFetch(url);
 }
 
 export async function getTableByNumberApi(numberTable) {
   const tableFilter = `number=${numberTable}`;
-  const url = `${BASE_API}/api/tables/?${tableFilter}`;
+  const url = `${BASE_API}/api/v1/tables/?${tableFilter}`;
 
   return apiFetch(url);
 }

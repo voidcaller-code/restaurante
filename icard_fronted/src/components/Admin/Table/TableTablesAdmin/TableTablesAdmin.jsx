@@ -41,18 +41,30 @@ export function TableTablesAdmin(props) {
       >
         <thead>
           <tr>
-            <th>Mesa número</th>
-            <th className="text-end">Acciones</th>
+            <th className="table-tables-admin__number-cell">Número de mesa</th>
+            <th className="table-tables-admin__type-cell">Tipo</th>
+            <th className="table-tables-admin__capacity-cell">Capacidad</th>
+            <th className="table-tables-admin__actions-cell">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          {tables.length > 0 ? (
-            tables.map((table) => (
+          {tables.retData.length > 0 ? (
+            tables.retData.map((table) => (
               <tr key={table.id}>
-                <td>{table.number}</td>
+                <td className="table-tables-admin__number-cell">
+                  {table.id}
+                </td>
 
-                <td className="text-end">
+                <td className="table-tables-admin__type-cell">
+                  {table.tipo_display}
+                </td>
+
+                <td className="table-tables-admin__capacity-cell">
+                  {table.capacity}
+                </td>
+
+                <td className="table-tables-admin__actions-cell">
                   <Actions
                     table={table}
                     updateTable={updateTable}
@@ -64,7 +76,7 @@ export function TableTablesAdmin(props) {
             ))
           ) : (
             <tr>
-              <td colSpan="2" className="text-center">
+              <td colSpan="4" className="text-center">
                 No hay mesas registradas.
               </td>
             </tr>

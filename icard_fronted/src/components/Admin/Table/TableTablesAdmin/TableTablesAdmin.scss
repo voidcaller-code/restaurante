@@ -1,7 +1,42 @@
 .table-tables-admin {
+  width: 100%;
+
+  th,
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  &__number-cell {
+    width: 1%;
+    white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  &__type-cell {
+    width: auto;
+  }
+
+  &__capacity-cell {
+    width: 1%;
+    white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  &__actions-cell {
+    width: 150px;
+    min-width: 150px;
+    white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   &__actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
   }
 

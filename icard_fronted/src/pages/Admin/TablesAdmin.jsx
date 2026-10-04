@@ -44,7 +44,7 @@ export function TablesAdmin() {
   }
 
   const onDeleteTable = async (data) => {
-    const result = window.confirm(`¿Eliminar mesa ${data.number}?`)
+    const result = window.confirm(`¿Eliminar mesa ${data.id}?`)
 
     if (result) {
       await deleteTable(data.id)
@@ -73,7 +73,7 @@ export function TablesAdmin() {
         />
       )}
 
-      <ModalBasic show={showModal} onClose={openCloseModal} title={titleModal}>
+      <ModalBasic show={showModal} onClose={openCloseModal} title={titleModal} size="large">
         {contentModal}
       </ModalBasic>
     </>

@@ -12,7 +12,7 @@ import { useAuth } from "./useAuth";
 export function useTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tables, setTables] = useState([]);
+  const [tables, setTables] = useState([]); // guardas las mesas que obtienes de la API
   const [table, setTable] = useState(null);
 
   const { auth } = useAuth();
