@@ -4,11 +4,15 @@ import './ModalConfirm.scss'
 export function ModalConfirm(props) {
   const {
     title,
+    message,
     show,
     onClose,
+    onCancel = onClose,
     onCloseText = 'Cancelar',
+    onCloseVariant = 'danger',
     onConfirm,
     onConfirmText = 'Aceptar',
+    onConfirmVariant = 'success',
   } = props
 
   return (
@@ -25,12 +29,14 @@ export function ModalConfirm(props) {
         </Modal.Header>
       )}
 
+      {message && <Modal.Body>{message}</Modal.Body>}
+
       <Modal.Footer>
-        <Button variant="danger" onClick={onClose}>
+        <Button variant={onCloseVariant} onClick={onCancel}>
           {onCloseText}
         </Button>
 
-        <Button variant="success" onClick={onConfirm}>
+        <Button variant={onConfirmVariant} onClick={onConfirm}>
           {onConfirmText}
         </Button>
       </Modal.Footer>

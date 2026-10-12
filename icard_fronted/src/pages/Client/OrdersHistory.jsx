@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import { OrderHistoryItem } from '../../components/Client'
 import { ModalConfirm } from '../../components/Common'
 import { useOrder, useTable, usePayment } from '../../hooks'
+import { PAYMENT_STATUS, PAYMENT_TYPE } from '../../utils/constants'
 
 export function OrdersHistory() {
   const [idTable, setIdTable] = useState(null)
@@ -56,10 +57,12 @@ export function OrdersHistory() {
       table: idTable,
       totalPayment: totalPayment.toFixed(2),
       paymentType,
-      statusPayment: 'PENDING',
+      statusPayment: PAYMENT_STATUS.PENDING,
     }
 
     const payment = await createPayment(paymentData)
+
+    if (!payment) return
 
     for await (const order of orders) {
       await addPaymentToOrder(order.id, payment.id)
@@ -107,9 +110,9 @@ export function OrdersHistory() {
         title="Pagar con tarjeta o efectivo"
         show={showTypePayment}
         onCloseText="Efectivo"
-        onClose={() => onCreatePayment('CASH')}
+        onClose={() => onCreatePayment(PAYMENT_TYPE.CASH)}
         onConfirmText="Tarjeta"
-        onConfirm={() => onCreatePayment('CARD')}
+        onConfirm={() => onCreatePayment(PAYMENT_TYPE.CARD)}
       />
     </div>
   )

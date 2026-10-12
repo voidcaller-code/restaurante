@@ -2,7 +2,7 @@ import { BASE_API, PAYMENT_STATUS } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function createPaymentApi(paymentData) {
-  const url = `${BASE_API}/api/payments/`;
+  const url = `${BASE_API}/api/v1/payments/`;
 
   return apiFetch(url, {
     method: "POST",
@@ -17,7 +17,7 @@ export async function getPaymentByTableApi(idTable) {
   const tableFilter = `table=${idTable}`;
   const statusFilter = `statusPayment=${PAYMENT_STATUS.PENDING}`;
 
-  const url = `${BASE_API}/api/payments/?${tableFilter}&${statusFilter}`;
+  const url = `${BASE_API}/api/v1/payments/?${tableFilter}&${statusFilter}`;
 
   return apiFetch(url, {
     headers: {
@@ -27,7 +27,7 @@ export async function getPaymentByTableApi(idTable) {
 }
 
 export async function closePaymentApi(idPayment) {
-  const url = `${BASE_API}/api/payments/${idPayment}/`;
+  const url = `${BASE_API}/api/v1/payments/${idPayment}/`;
 
   return apiFetch(url, {
     method: "PATCH",
@@ -44,7 +44,7 @@ export async function getPaymentsApi() {
   const paymentFilter = `statusPayment=${PAYMENT_STATUS.PAID}`;
   const orderingFilter = "ordering=created_at";
 
-  const url = `${BASE_API}/api/payments/?${paymentFilter}&${orderingFilter}`;
+  const url = `${BASE_API}/api/v1/payments/?${paymentFilter}&${orderingFilter}`;
 
   return apiFetch(url);
 }

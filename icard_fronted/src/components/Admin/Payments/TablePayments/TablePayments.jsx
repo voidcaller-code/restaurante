@@ -4,6 +4,7 @@ import { FaCreditCard, FaEye, FaMoneyBillWave } from 'react-icons/fa'
 
 import { ModalBasic } from '../../../Common'
 import { PaymentProductList } from '../PaymentProductList'
+import { PAYMENT_TYPE } from '../../../../utils/constants'
 
 import './TablePayments.scss'
 
@@ -17,8 +18,8 @@ export function TablePayments(props) {
   const openCloseModal = () => setShowModal((prev) => !prev)
 
   const getPaymentTypeIcon = (key) => {
-    if (key === 'CARD') return <FaCreditCard />
-    if (key === 'CASH') return <FaMoneyBillWave />
+    if (key === PAYMENT_TYPE.CARD) return <FaCreditCard />
+    if (key === PAYMENT_TYPE.CASH) return <FaMoneyBillWave />
 
     return null
   }

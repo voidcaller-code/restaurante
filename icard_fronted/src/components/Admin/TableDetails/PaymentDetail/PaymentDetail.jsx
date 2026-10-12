@@ -2,6 +2,7 @@ import { Button, Table } from 'react-bootstrap'
 import { FaCreditCard, FaMoneyBillWave } from 'react-icons/fa'
 
 import { usePayment, useOrder } from '../../../../hooks'
+import { PAYMENT_TYPE } from '../../../../utils/constants'
 
 import './PaymentDetail.scss'
 
@@ -12,15 +13,15 @@ export function PaymentDetail(props) {
   const { closeOrder } = useOrder()
 
   const getIconPayment = (key) => {
-    if (key === 'CARD') return <FaCreditCard />
-    if (key === 'CASH') return <FaMoneyBillWave />
+    if (key === PAYMENT_TYPE.CARD) return <FaCreditCard />
+    if (key === PAYMENT_TYPE.CASH) return <FaMoneyBillWave />
 
     return null
   }
 
   const getPaymentName = (key) => {
-    if (key === 'CARD') return 'Tarjeta'
-    if (key === 'CASH') return 'Efectivo'
+    if (key === PAYMENT_TYPE.CARD) return 'Tarjeta'
+    if (key === PAYMENT_TYPE.CASH) return 'Efectivo'
 
     return 'No definido'
   }
@@ -46,12 +47,12 @@ export function PaymentDetail(props) {
         <tbody>
           <tr>
             <td>Mesa:</td>
-            <td>{payment.table_data?.number}</td>
+            <td>{payment.table_data.id}</td>
           </tr>
 
           <tr>
             <td>Total:</td>
-            <td>{payment.totalPayment} €</td>
+            <td>{payment.totalPayment} $</td>
           </tr>
 
           <tr>

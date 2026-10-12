@@ -2,22 +2,25 @@ import { useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import { HeaderPage, AddOrderForm } from '../../components/Admin'
-import { ModalBasic } from '../../components/Common'
+import { ModalBasic, ModalConfirm } from '../../components/Common'
 import {
   ListOrderAdmin,
   PaymentDetail,
 } from '../../components/Admin/TableDetails'
 import { useOrder, useTable, usePayment } from '../../hooks'
+import { PAYMENT_STATUS, PAYMENT_TYPE } from '../../utils/constants'
 
 export function TableDetailsAdmin() {
   const [reloadOrders, setReloadOrders] = useState(false)
   const [paymentData, setPaymentData] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [showPaymentConfirmation, setShowPaymentConfirmation] = useState(false)
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false)
 
   const { id } = useParams()
 
   const { loading, orders, getOrdersByTable, addPaymentToOrder } = useOrder()
-  const { table, getTable } = useTable()
+  const { getTable } = useTable()
   const { createPayment, getPaymentByTable } = usePayment()
 
   useEffect(() => {
@@ -45,12 +48,13 @@ export function TableDetailsAdmin() {
   const onReloadOrders = () => setReloadOrders((prev) => !prev)
   const openCloseModal = () => setShowModal((prev) => !prev)
 
-  const onCreatePayment = async () => {
-    const result = window.confirm(
-      '¿Estás seguro de generar la cuenta de la mesa?'
-    )
+  const confirmPaymentCreation = () => {
+    setShowPaymentConfirmation(false)
+    setShowPaymentMethod(true)
+  }
 
-    if (!result) return
+  const onCreatePayment = async (paymentType) => {
+    setShowPaymentMethod(false)
 
     let totalPayment = 0
 
@@ -58,18 +62,16 @@ export function TableDetailsAdmin() {
       totalPayment += Number(order.product_data.price)
     })
 
-    const resultTypePayment = window.confirm(
-      '¿Pago con tarjeta? Pulsa ACEPTAR para tarjeta o CANCELAR para efectivo.'
-    )
-
     const newPaymentData = {
       table: id,
-      totalPayment: totalPayment.toFixed(2),
-      paymentType: resultTypePayment ? 'CARD' : 'CASH',
-      statusPayment: 'PENDING',
+      totalPayment: totalPayment,
+      paymentType,
+      statusPayment: PAYMENT_STATUS.PENDING,
     }
 
     const payment = await createPayment(newPaymentData)
+
+    if (!payment) return
 
     for await (const order of orders) {
       await addPaymentToOrder(order.id, payment.id)
@@ -85,7 +87,7 @@ export function TableDetailsAdmin() {
         btnTitle={paymentData ? 'Ver cuenta' : 'Añadir pedido'}
         btnClick={openCloseModal}
         btnTitleTwo={!paymentData ? 'Generar cuenta' : null}
-        btnClickTwo={onCreatePayment}
+        btnClickTwo={() => setShowPaymentConfirmation(true)}
         btnTitleThree={'Volver a pedidos'}
         btnClickThree={() => window.history.back()}
       />
@@ -120,6 +122,31 @@ export function TableDetailsAdmin() {
           />
         )}
       </ModalBasic>
+
+      <ModalConfirm
+        title="Generar cuenta"
+        message="¿Estás seguro de generar la cuenta de la mesa?"
+        show={showPaymentConfirmation}
+        onClose={() => setShowPaymentConfirmation(false)}
+        onCloseText="Cancelar"
+        onCloseVariant="outline-secondary"
+        onConfirm={confirmPaymentCreation}
+        onConfirmText="Continuar"
+        onConfirmVariant="primary"
+      />
+
+      <ModalConfirm
+        title="Método de pago"
+        message="¿Cómo deseas pagar la cuenta de la mesa?"
+        show={showPaymentMethod}
+        onClose={() => setShowPaymentMethod(false)}
+        onCancel={() => onCreatePayment(PAYMENT_TYPE.CASH)}
+        onCloseText="Efectivo"
+        onCloseVariant="outline-primary"
+        onConfirm={() => onCreatePayment(PAYMENT_TYPE.CARD)}
+        onConfirmText="Tarjeta"
+        onConfirmVariant="primary"
+      />
     </>
   )
 }

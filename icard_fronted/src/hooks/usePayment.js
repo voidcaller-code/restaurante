@@ -13,7 +13,8 @@ export function usePayment() {
 
   const createPayment = async (paymentData) => {
     try {
-      return await createPaymentApi(paymentData);
+      const response = await createPaymentApi(paymentData);
+      return response?.retData ?? null;
     } catch (error) {
       setError(error);
       return null;
@@ -22,7 +23,8 @@ export function usePayment() {
 
   const getPaymentByTable = async (idTable) => {
     try {
-      return await getPaymentByTableApi(idTable);
+      const response = await getPaymentByTableApi(idTable);
+      return response?.retData ?? [];
     } catch (error) {
       setError(error);
       return [];
@@ -41,7 +43,7 @@ export function usePayment() {
     try {
       setLoading(true);
       const response = await getPaymentsApi();
-      setPayments(response);
+      setPayments(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {

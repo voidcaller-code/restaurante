@@ -8,6 +8,11 @@ export const ORDER_STATUS = {
 };
 
 export const PAYMENT_STATUS = {
-  PENDING: "PENDING",
-  PAID: "PAID",
+  PENDING: "pending",
+  PAID: "paid",
+};
+
+export const PAYMENT_TYPE = {
+  CARD: "card",
+  CASH: "cash",
 };
