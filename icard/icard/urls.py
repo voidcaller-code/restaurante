@@ -22,6 +22,9 @@ urlpatterns = [
 
     # Orders
     path('api/v1/', include('orders.urls')),
+
+    # Payments
+    path('api/v1/', include('payments.urls')),
 ]
 
 #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
