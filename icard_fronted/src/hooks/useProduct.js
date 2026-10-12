@@ -20,7 +20,7 @@ export function useProduct() {
     try {
       setLoading(true);
       const response = await getProductsApi();
-      setProducts(response);
+      setProducts(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {
@@ -74,7 +74,7 @@ export function useProduct() {
     try {
       setLoading(true);
       const response = await getProductsByCategoryApi(idCategory);
-      setProducts(response);
+      setProducts(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {

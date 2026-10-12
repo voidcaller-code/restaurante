@@ -81,11 +81,13 @@ export function TableDetailsAdmin() {
   return (
     <>
       <HeaderPage
-        title={`Mesa ${table?.number || ''}`}
+        title={`Mesa ${id || ''}`}
         btnTitle={paymentData ? 'Ver cuenta' : 'Añadir pedido'}
         btnClick={openCloseModal}
         btnTitleTwo={!paymentData ? 'Generar cuenta' : null}
         btnClickTwo={onCreatePayment}
+        btnTitleThree={'Volver a pedidos'}
+        btnClickThree={() => window.history.back()}
       />
 
       {loading ? (
@@ -101,6 +103,7 @@ export function TableDetailsAdmin() {
         show={showModal}
         onClose={openCloseModal}
         title={paymentData ? 'Detalle de cuenta' : 'Generar pedido'}
+        size="large"
       >
         {paymentData ? (
           <PaymentDetail

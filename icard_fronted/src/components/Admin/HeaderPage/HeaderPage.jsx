@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap'
 import './HeaderPage.scss'
 
 export function HeaderPage(props) {
-  const { title, btnTitle, btnClick, btnTitleTwo, btnClickTwo } = props
+  const { title, btnTitle, btnClick, btnTitleTwo, btnClickTwo, btnTitleThree, btnClickThree } = props
 
   return (
     <div className="header-page-admin">
@@ -18,6 +18,12 @@ export function HeaderPage(props) {
         {btnTitleTwo && (
           <Button variant="danger" onClick={btnClickTwo}>
             {btnTitleTwo}
+          </Button>
+        )}
+
+        {btnTitleThree && (
+          <Button variant="warning" onClick={btnClickThree}>
+            {btnTitleThree}
           </Button>
         )}
       </div>

@@ -27,8 +27,8 @@ export function TableProductAdmin(props) {
       </thead>
 
       <tbody className="text-center">
-        {products.retData.length > 0 ? (
-          products.retData.map((product) => (
+        {products.length > 0 ? (
+          products.map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td className="table-product-admin__image-cell">
