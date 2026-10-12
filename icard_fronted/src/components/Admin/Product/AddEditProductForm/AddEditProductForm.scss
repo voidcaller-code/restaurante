@@ -1,0 +1,25 @@
+.add-edit-product-form {
+  &__dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px dashed #ced4da;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #f8f9fa;
+
+    &--error {
+      border-color: #dc3545;
+      background-color: #fff5f5;
+    }
+  }
+
+  &__image {
+    display: block;
+    margin: 1rem auto 0;
+    width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+  }
+}
