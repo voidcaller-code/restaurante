@@ -1,0 +1,44 @@
+.table-product-admin {
+  &__id-cell {
+    width: 70px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  &__icon {
+    font-size: 1.1rem;
+
+    &--active {
+      color: #198754;
+    }
+
+    &--inactive {
+      color: #dc3545;
+    }
+  }
+
+  &__image-cell {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__image {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  &__actions-cell {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

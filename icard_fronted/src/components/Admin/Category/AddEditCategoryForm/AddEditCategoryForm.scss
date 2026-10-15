@@ -1,0 +1,23 @@
+.add-edit-category-form {
+  &__dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px dashed #ced4da;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #f8f9fa;
+
+    &--error {
+      border-color: #dc3545;
+      background-color: #fff5f5;
+    }
+  }
+
+  &__image {
+    margin-top: 1rem;
+    max-height: 220px;
+    object-fit: contain;
+  }
+}
