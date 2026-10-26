@@ -40,7 +40,7 @@ export function PaymentProductList(props) {
               <span>{order.product_data?.title}</span>
             </div>
 
-            <span>{order.product_data?.price} €</span>
+            <span>{order.product_data?.price} $</span>
           </div>
         ))
       ) : (

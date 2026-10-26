@@ -59,7 +59,8 @@ export function useOrder() {
 
   const getOrdersByPayment = async (idPayment) => {
     try {
-      return await getOrdersByPaymentApi(idPayment);
+      const response = await getOrdersByPaymentApi(idPayment);
+      return response?.retData ?? [];
     } catch (error) {
       setError(error);
       return [];

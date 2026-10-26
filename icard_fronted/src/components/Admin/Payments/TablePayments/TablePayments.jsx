@@ -25,7 +25,7 @@ export function TablePayments(props) {
   }
 
   const showDetails = (payment) => {
-    setTitleModal(`Pedidos de la mesa ${payment.table_data?.number || ''}`)
+    setTitleModal(`Pedidos de la mesa ${payment.table_data?.id || ''}`)
     setContentModal(<PaymentProductList payment={payment} />)
     openCloseModal()
   }
@@ -39,27 +39,25 @@ export function TablePayments(props) {
         hover
         className="table-payments-admin align-middle"
       >
-        <thead>
+        <thead className="text-center">
           <tr>
-            <th>ID</th>
-            <th>Mesa</th>
+            <th>ID Mesa</th>
             <th>Total</th>
             <th>Tipo de pago</th>
             <th>Fecha</th>
-            <th className="text-end">Acciones</th>
+            <th>Acciones</th>
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="text-center">
           {payments.length > 0 ? (
             payments.map((payment) => (
               <tr key={payment.id}>
                 <td>{payment.id}</td>
-                <td>{payment.table_data?.number}</td>
-                <td>{payment.totalPayment} €</td>
+                <td>{payment.totalPayment} $</td>
                 <td>{getPaymentTypeIcon(payment.paymentType)}</td>
                 <td>{formatDate(payment.created_at)}</td>
-                <td className="text-end">
+                <td>
                   <Button
                     type="button"
                     variant="outline-primary"
@@ -73,7 +71,7 @@ export function TablePayments(props) {
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="text-center">
+              <td colSpan="5">
                 No hay pagos registrados.
               </td>
             </tr>
@@ -81,7 +79,12 @@ export function TablePayments(props) {
         </tbody>
       </Table>
 
-      <ModalBasic show={showModal} onClose={openCloseModal} title={titleModal}>
+      <ModalBasic
+        show={showModal}
+        onClose={openCloseModal}
+        title={titleModal}
+        size="large"
+      >
         {contentModal}
       </ModalBasic>
     </>
