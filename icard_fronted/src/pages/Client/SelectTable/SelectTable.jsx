@@ -7,7 +7,7 @@ import { useTable } from '../../../hooks'
 import './SelectTable.scss'
 
 export function SelectTable() {
-  const [tableNum, setTableNum] = useState('')
+  const [idTable, setIdTable] = useState('')
   const [error, setError] = useState(null)
 
   const { isExistTable } = useTable()
@@ -18,17 +18,17 @@ export function SelectTable() {
 
     setError(null)
 
-    if (!tableNum) {
+    if (!idTable) {
       setError('No has introducido ninguna mesa')
       return
     }
 
-    const exist = await isExistTable(tableNum)
+    const exist = await isExistTable(idTable)
 
     if (exist) {
-      navigate(`/client/${tableNum}`)
+      navigate(`/client/${idTable}`)
     } else {
-      setError('El número de la mesa no existe')
+      setError('El identificador de la mesa no existe')
     }
   }
 
@@ -36,15 +36,15 @@ export function SelectTable() {
     <div className="select-table">
       <div className="select-table__content">
         <h1>Bienvenido a iCard</h1>
-        <h2>Introduce tu número de mesa</h2>
+        <h2>Introduce el identificador de tu mesa</h2>
 
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
-              placeholder="Ejemplo: 135, 873, 904, 337"
+              placeholder="Ejemplo: 1"
               type="number"
-              value={tableNum}
-              onChange={(event) => setTableNum(event.target.value)}
+              value={idTable}
+              onChange={(event) => setIdTable(event.target.value)}
             />
           </Form.Group>
 

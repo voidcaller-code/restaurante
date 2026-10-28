@@ -17,7 +17,7 @@ const routesClient = [
         element: <SelectTable />,
       },
       {
-        path: 'client/:tableNumber',
+        path: 'client/:idTable',
         element: <ClientLayout />,
         children: [
           {

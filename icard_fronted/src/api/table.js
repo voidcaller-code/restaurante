@@ -53,8 +53,8 @@ export async function getTableApi(idTable) {
   return apiFetch(url);
 }
 
-export async function getTableByNumberApi(numberTable) {
-  const tableFilter = `number=${numberTable}`;
+export async function getTableByIdApi(idTable) {
+  const tableFilter = `id=${encodeURIComponent(idTable)}`;
   const url = `${BASE_API}/api/v1/tables/?${tableFilter}`;
 
   return apiFetch(url);

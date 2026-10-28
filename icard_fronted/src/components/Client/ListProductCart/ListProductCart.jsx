@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
 import { Button, Image } from 'react-bootstrap'
 import { FaTimes } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
-import { useOrder, useTable } from '../../../hooks'
+import { useOrder } from '../../../hooks'
 import { removeProductCartApi, cleanProductCartApi } from '../../../api/cart'
 
 import './ListProductCart.scss'
@@ -12,21 +11,14 @@ import './ListProductCart.scss'
 export function ListProductCart(props) {
   const { products = [], onReloadCart } = props
 
-  const [total, setTotal] = useState(0)
-
   const { addOrderToTable } = useOrder()
-  const { getTableByNumber } = useTable()
 
-  const { tableNumber } = useParams()
+  const { idTable } = useParams()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const totalTemp = products.reduce((acc, product) => {
-      return acc + Number(product.price)
-    }, 0)
-
-    setTotal(totalTemp.toFixed(2))
-  }, [products])
+  const total = products
+    .reduce((acc, product) => acc + Number(product.price), 0)
+    .toFixed(2)
 
   const removeProduct = (index) => {
     removeProductCartApi(index)
@@ -40,21 +32,12 @@ export function ListProductCart(props) {
         return
       }
 
-      const tableData = await getTableByNumber(tableNumber)
-
-      if (!tableData || tableData.length === 0) {
-        toast.error('La mesa no existe')
-        return
-      }
-
-      const idTable = tableData[0].id
-
       for await (const product of products) {
         await addOrderToTable(idTable, product.id)
       }
 
       cleanProductCartApi()
-      navigate(`/client/${tableNumber}/orders`)
+      navigate(`/client/${idTable}/orders`)
     } catch (error) {
       console.error(error)
       toast.error('Error al realizar el pedido')

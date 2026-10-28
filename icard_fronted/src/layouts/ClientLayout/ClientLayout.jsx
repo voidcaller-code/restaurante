@@ -1,47 +1,46 @@
 import { useEffect } from 'react'
 import { Link, Outlet, useNavigate, useParams } from 'react-router'
 import { Button, Container } from 'react-bootstrap'
+import { useTable } from '../../hooks'
 import './ClientLayout.scss'
 import { FaShoppingCart, FaListAlt, FaSignOutAlt } from 'react-icons/fa'
 
 export function ClientLayout() {
-  const { tableNumber } = useParams()
+  const { idTable } = useParams()
   const navigate = useNavigate()
-
- 
   const { isExistTable } = useTable()
 
   useEffect(() => {
-    
     const validateTable = async () => {
-      const exist = await isExistTable(tableNumber)
-      if (!exist) closeTable()
+      const exist = await isExistTable(idTable)
+      if (!exist) navigate('/', { replace: true })
     }
-        validateTable()
-  }, [tableNumber])
+
+    validateTable()
+  }, [idTable, isExistTable, navigate])
 
   const closeTable = () => {
     navigate('/')
   }
 
   const goToCart = () => {
-    navigate(`/client/${tableNumber}/cart`)
+    navigate(`/client/${idTable}/cart`)
   }
 
   const goToOrders = () => {
-    navigate(`/client/${tableNumber}/orders`)
+    navigate(`/client/${idTable}/orders`)
   }
 
   return (
     <div className="client-layout-bg">
       <Container className="client-layout">
         <div className="client-layout__header">
-          <Link to={`/client/${tableNumber || ''}`} className="client-layout__logo">
+          <Link to={`/client/${idTable || ''}`} className="client-layout__logo">
             <h1>iCard</h1>
           </Link>
 
           <span>
-            {tableNumber ? `Mesa ${tableNumber}` : 'Restaurante'}
+            {idTable ? `Mesa ${idTable}` : 'Restaurante'}
           </span>
           
           <div className="client-layout__actions">

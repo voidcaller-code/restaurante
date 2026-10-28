@@ -19,11 +19,11 @@ export function TableTablesAdmin(props) {
     setContentModal(
       <div className="table-tables-admin__qr">
         <QRCodeSVG
-          value={`${window.location.origin}/client/${table.number}`}
+          value={`${window.location.origin}/client/${table.id}`}
           size={220}
         />
 
-        <p className="mt-3 mb-0">Mesa {table.number}</p>
+        <p className="mt-3 mb-0">Mesa {table.id}</p>
       </div>
     )
 
@@ -41,7 +41,7 @@ export function TableTablesAdmin(props) {
       >
         <thead>
           <tr>
-            <th className="table-tables-admin__number-cell">Número de mesa</th>
+            <th className="table-tables-admin__number-cell">ID de mesa</th>
             <th className="table-tables-admin__type-cell">Tipo</th>
             <th className="table-tables-admin__capacity-cell">Capacidad</th>
             <th className="table-tables-admin__actions-cell">Acciones</th>

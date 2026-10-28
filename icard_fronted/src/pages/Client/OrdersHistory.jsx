@@ -4,34 +4,21 @@ import { useParams } from 'react-router'
 
 import { OrderHistoryItem } from '../../components/Client'
 import { ModalConfirm } from '../../components/Common'
-import { useOrder, useTable, usePayment } from '../../hooks'
+import { useOrder, usePayment } from '../../hooks'
 import { PAYMENT_STATUS, PAYMENT_TYPE } from '../../utils/constants'
 
 export function OrdersHistory() {
-  const [idTable, setIdTable] = useState(null)
   const [showTypePayment, setShowTypePayment] = useState(false)
   const [isRequestAccount, setIsRequestAccount] = useState([])
 
   const { loading, orders, getOrdersByTable, addPaymentToOrder } = useOrder()
-  const { getTableByNumber } = useTable()
   const { createPayment, getPaymentByTable } = usePayment()
 
-  const { tableNumber } = useParams()
+  const { idTable } = useParams()
 
   useEffect(() => {
-    const loadTableAndOrders = async () => {
-      const table = await getTableByNumber(tableNumber)
-
-      if (!table || table.length === 0) return
-
-      const idTableTemp = table[0].id
-
-      setIdTable(idTableTemp)
-      getOrdersByTable(idTableTemp, '', 'ordering=-status,-created_at')
-    }
-
-    loadTableAndOrders()
-  }, [tableNumber])
+    getOrdersByTable(idTable, '', 'ordering=-status,-created_at')
+  }, [idTable])
 
   useEffect(() => {
     const loadPayment = async () => {

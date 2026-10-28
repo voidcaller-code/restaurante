@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getTablesApi,
   addTableApi,
   updateTableApi,
   deleteTableApi,
   getTableApi,
-  getTableByNumberApi,
+  getTableByIdApi,
 } from "../api/table";
 import { useAuth } from "./useAuth";
 
@@ -74,29 +74,16 @@ export function useTable() {
     }
   };
 
-  const isExistTable = async (tableNumber) => {
+  const isExistTable = useCallback(async (idTable) => {
     try {
-      const response = await getTableByNumberApi(tableNumber);
+      const response = await getTableByIdApi(idTable);
 
-      if (!response || response.length === 0) {
-        throw new Error("La mesa no existe");
-      }
-
-      return true;
+      return (response?.retData?.length ?? 0) > 0;
     } catch (error) {
       setError(error);
       return false;
     }
-  };
-
-  const getTableByNumber = async (tableNumber) => {
-    try {
-      return await getTableByNumberApi(tableNumber);
-    } catch (error) {
-      setError(error);
-      return null;
-    }
-  };
+  }, []);
 
   return {
     loading,
@@ -109,6 +96,5 @@ export function useTable() {
     deleteTable,
     getTable,
     isExistTable,
-    getTableByNumber,
   };
 }

@@ -6,7 +6,7 @@ import { useProduct } from '../../hooks'
 import { ListProducts } from '../../components/Client'
 
 export function Products() {
-  const { tableNumber, idCategory } = useParams()
+  const { idTable, idCategory } = useParams()
   const { loading, products, getProductsByCategory } = useProduct()
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function Products() {
 
   return (
     <div>
-      <Link to={`/client/${tableNumber}`}>Volver a categorías</Link>
+      <Link to={`/client/${idTable}`}>Volver a categorías</Link>
 
       {loading ? (
         <div className="text-center my-4">

@@ -11,7 +11,7 @@ export function Cart() {
   const [reloadCart, setReloadCart] = useState(false)
 
   const { getProductById } = useProduct()
-  const { tableNumber } = useParams()
+  const { idTable } = useParams()
 
   useEffect(() => {
     const loadProductsCart = async () => {
@@ -48,7 +48,7 @@ export function Cart() {
         <div className="text-center">
           <p>Tu carrito está vacío</p>
 
-          <Link to={`/client/${tableNumber}/orders`}>
+          <Link to={`/client/${idTable}/orders`}>
             <Button variant="primary">Ver pedidos</Button>
           </Link>
         </div>
