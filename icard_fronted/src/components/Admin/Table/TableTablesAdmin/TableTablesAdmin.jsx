@@ -16,7 +16,6 @@ export function TableTablesAdmin(props) {
   const openCloseModal = () => setShowModal((prev) => !prev)
 
   const showQr = (table) => {
-    console.log(`Aquiiii ----> ${window.location.origin}/client/${table.id}`)
     setContentModal(
       <div className="table-tables-admin__qr">
         <QRCodeSVG

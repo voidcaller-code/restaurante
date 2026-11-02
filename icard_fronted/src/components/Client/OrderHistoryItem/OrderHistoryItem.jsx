@@ -5,17 +5,21 @@ import { ORDER_STATUS } from '../../../utils/constants'
 
 import './OrderHistoryItem.scss'
 
+const ORDER_STATUS_LABELS = {
+  [ORDER_STATUS.PENDING]: 'Pendiente',
+  [ORDER_STATUS.DELIVERED]: 'Entregado',
+}
+
 export function OrderHistoryItem(props) {
   const { order } = props
 
   const { title, image, price, category_data: category } =
     order.product_data || {}
 
-  const statusClass = order.status?.toLowerCase() || ''
-  const isPending = order.status === ORDER_STATUS.PENDING
+  const status = order.status?.toLowerCase() || ''
 
   return (
-    <article className={`order-history-item order-history-item--${statusClass}`}>
+    <article className={`order-history-item order-history-item--${status}`}>
       <div className="order-history-item__media">
         {image ? (
           <Image
@@ -41,7 +45,7 @@ export function OrderHistoryItem(props) {
 
           <span className="order-history-item__status">
             <span className="order-history-item__status-dot" aria-hidden="true" />
-            {isPending ? 'En marcha' : 'Entregado'}
+            {getStatusLabel(status)}
           </span>
         </div>
 
@@ -65,6 +69,10 @@ export function OrderHistoryItem(props) {
       </div>
     </article>
   )
+}
+
+function getStatusLabel(status) {
+  return ORDER_STATUS_LABELS[status] || 'Sin estado'
 }
 
 function formatPrice(price) {

@@ -5,12 +5,14 @@ import './TableCategoryAdmin.scss'
 
 export function TableCategoryAdmin(props) {
   const {
-    categories = { retData: [] },
+    categories = [],
     updateCategory,
     deleteCategory,
   } = props
 
-  const categoryList = categories?.retData || []
+  const categoryList = Array.isArray(categories)
+    ? categories
+    : categories?.retData ?? []
 
   return (
     <Table

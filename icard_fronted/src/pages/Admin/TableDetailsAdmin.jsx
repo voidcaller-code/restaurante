@@ -24,8 +24,23 @@ export function TableDetailsAdmin() {
   const { createPayment, getPaymentByTable } = usePayment()
 
   useEffect(() => {
-    getOrdersByTable(id, '', 'ordering=-status,created_at')
-  }, [id, reloadOrders])
+    const loadOrders = (showLoading = true) => {
+      getOrdersByTable(
+        id,
+        '',
+        'ordering=-status,created_at',
+        showLoading,
+      )
+    }
+
+    loadOrders()
+
+    const intervalId = setInterval(() => {
+      loadOrders(false)
+    }, 5000)
+
+    return () => clearInterval(intervalId)
+  }, [id, reloadOrders, getOrdersByTable])
 
   useEffect(() => {
     getTable(id)
