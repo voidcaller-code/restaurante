@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   createPaymentApi,
   getPaymentByTableApi,
@@ -21,7 +21,7 @@ export function usePayment() {
     }
   };
 
-  const getPaymentByTable = async (idTable) => {
+  const getPaymentByTable = useCallback(async (idTable) => {
     try {
       const response = await getPaymentByTableApi(idTable);
       return response?.retData ?? [];
@@ -29,7 +29,7 @@ export function usePayment() {
       setError(error);
       return [];
     }
-  };
+  }, []);
 
   const closePayment = async (idPayment) => {
     try {

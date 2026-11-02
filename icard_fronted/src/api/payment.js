@@ -16,10 +16,12 @@ export async function createPaymentApi(paymentData) {
 export async function getPaymentByTableApi(idTable) {
   const tableFilter = `table=${idTable}`;
   const statusFilter = `statusPayment=${PAYMENT_STATUS.PENDING}`;
+  const cacheBuster = `_=${Date.now()}`;
 
-  const url = `${BASE_API}/api/v1/payments/?${tableFilter}&${statusFilter}`;
+  const url = `${BASE_API}/api/v1/payments/?${tableFilter}&${statusFilter}&${cacheBuster}`;
 
   return apiFetch(url, {
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },

@@ -52,13 +52,19 @@ export function TableDetailsAdmin() {
 
       if (response?.length > 0) {
         setPaymentData(response[0])
+        setShowPaymentConfirmation(false)
+        setShowPaymentMethod(false)
       } else {
         setPaymentData(null)
       }
     }
 
     loadPayment()
-  }, [id, reloadOrders])
+
+    const intervalId = setInterval(loadPayment, 5000)
+
+    return () => clearInterval(intervalId)
+  }, [id, reloadOrders, getPaymentByTable])
 
   const onReloadOrders = () => setReloadOrders((prev) => !prev)
   const openCloseModal = () => setShowModal((prev) => !prev)

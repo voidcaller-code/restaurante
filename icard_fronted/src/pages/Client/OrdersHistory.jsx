@@ -17,14 +17,13 @@ export function OrdersHistory() {
   const { idTable } = useParams()
 
   useEffect(() => {
-    const loadOrders = (showLoading = true) => {
+    const loadOrders = (showLoading = true) =>
       getOrdersByTable(
         idTable,
         '',
         'ordering=-status,-created_at',
         showLoading,
       )
-    }
 
     loadOrders()
 
@@ -32,7 +31,18 @@ export function OrdersHistory() {
       loadOrders(false)
     }, 5000)
 
-    return () => clearInterval(intervalId)
+    const reloadWhenVisible = () => {
+      if (document.visibilityState === 'visible') {
+        loadOrders(false)
+      }
+    }
+
+    document.addEventListener('visibilitychange', reloadWhenVisible)
+
+    return () => {
+      clearInterval(intervalId)
+      document.removeEventListener('visibilitychange', reloadWhenVisible)
+    }
   }, [idTable, getOrdersByTable])
 
   useEffect(() => {
@@ -100,7 +110,10 @@ export function OrdersHistory() {
 
           {orders.length > 0 ? (
             orders.map((order) => (
-              <OrderHistoryItem key={order.id} order={order} />
+              <OrderHistoryItem
+                key={`${order.id}-${order.status}`}
+                order={order}
+              />
             ))
           ) : (
             <p className="text-muted mt-3">No tienes pedidos registrados.</p>

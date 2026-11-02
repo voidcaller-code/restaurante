@@ -5,10 +5,11 @@ export async function getOrdersByTableApi(idTable, status = "", ordering = "") {
   const tableFilter = `table=${idTable}`;
   const statusFilter = `status=${status}`;
   const closeFilter = "close=False";
+  const cacheBuster = `_=${Date.now()}`;
 
-  const url = `${BASE_API}/api/v1/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}`;
+  const url = `${BASE_API}/api/v1/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}&${cacheBuster}`;
 
-  return apiFetch(url);
+  return apiFetch(url, { cache: "no-store" });
 }
 
 export async function checkDeliveredOrderApi(id) {
