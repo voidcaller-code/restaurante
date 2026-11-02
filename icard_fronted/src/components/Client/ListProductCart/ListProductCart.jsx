@@ -62,7 +62,7 @@ export function ListProductCart(props) {
               <span>{product.title}</span>
             </div>
 
-            <span>{product.price} €</span>
+            <span>{product.price} $</span>
 
             <button
               type="button"
@@ -84,7 +84,7 @@ export function ListProductCart(props) {
         onClick={createOrder}
         disabled={products.length === 0}
       >
-        Realizar pedido ({total} €)
+        Realizar pedido ({total} $)
       </Button>
     </div>
   )

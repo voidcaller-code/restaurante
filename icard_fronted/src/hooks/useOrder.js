@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getOrdersByTableApi,
   checkDeliveredOrderApi,
@@ -13,17 +13,23 @@ export function useOrder() {
   const [error, setError] = useState(null);
   const [orders, setOrders] = useState([]);
 
-  const getOrdersByTable = async (idTable, status, ordering) => {
+  const getOrdersByTable = useCallback(async (
+    idTable,
+    status,
+    ordering,
+    showLoading = true,
+  ) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
+
       const response = await getOrdersByTableApi(idTable, status, ordering);
       setOrders(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
-  };
+  }, []);
 
   const checkDeliveredOrder = async (idOrder) => {
     try {

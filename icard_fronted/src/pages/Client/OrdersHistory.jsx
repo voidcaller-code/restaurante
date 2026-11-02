@@ -17,8 +17,23 @@ export function OrdersHistory() {
   const { idTable } = useParams()
 
   useEffect(() => {
-    getOrdersByTable(idTable, '', 'ordering=-status,-created_at')
-  }, [idTable])
+    const loadOrders = (showLoading = true) => {
+      getOrdersByTable(
+        idTable,
+        '',
+        'ordering=-status,-created_at',
+        showLoading,
+      )
+    }
+
+    loadOrders()
+
+    const intervalId = setInterval(() => {
+      loadOrders(false)
+    }, 5000)
+
+    return () => clearInterval(intervalId)
+  }, [idTable, getOrdersByTable])
 
   useEffect(() => {
     const loadPayment = async () => {
@@ -42,7 +57,7 @@ export function OrdersHistory() {
 
     const paymentData = {
       table: idTable,
-      totalPayment: totalPayment.toFixed(2),
+      totalPayment: Math.round(totalPayment),
       paymentType,
       statusPayment: PAYMENT_STATUS.PENDING,
     }

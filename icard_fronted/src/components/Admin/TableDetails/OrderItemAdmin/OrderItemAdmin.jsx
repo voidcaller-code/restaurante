@@ -39,9 +39,6 @@ export function OrderItemAdmin(props) {
       <div className="order-item-admin__content">
         <div className="order-item-admin__header">
           <div>
-            <span className="order-item-admin__order-number">
-              Pedido #{order.id}
-            </span>
             <h3 className="order-item-admin__title">
               {title || 'Producto no disponible'}
             </h3>

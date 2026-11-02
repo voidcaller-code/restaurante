@@ -18,7 +18,7 @@ export function useCategory() {
     try {
       setLoading(true) // Cuando se esta cargando y termine la peticion
       const response = await getCategoriesApi() // Trae el listado de categorias
-      setCategories(response)
+      setCategories(response?.retData ?? [])
     } catch (error) {
       setError(error)
     } finally {

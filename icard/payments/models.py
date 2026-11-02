@@ -11,7 +11,7 @@ class Payment(models.Model):
         PAID = 'paid', 'Pagado'
 
     table = models.ForeignKey('tables.Table', on_delete=models.SET_NULL, null=True, blank=True)
-    totalPayment = models.DecimalField(max_digits=6, decimal_places=0, validators=[MinValueValidator(0), MaxValueValidator(100000)])
+    totalPayment = models.DecimalField(max_digits=10, decimal_places=0, validators=[MinValueValidator(0), MaxValueValidator(100000000)])
     paymentType = models.CharField(max_length=100, choices=PaymentType.choices, default=PaymentType.CASH)
     statusPayment = models.CharField(max_length=100, choices=StatusPayment.choices, default=StatusPayment.PENDING)
     created_at = models.DateTimeField(auto_now_add=True)

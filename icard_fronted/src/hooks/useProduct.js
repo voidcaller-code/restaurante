@@ -63,7 +63,10 @@ export function useProduct() {
 
   const getProductById = async (id) => {
     try {
-      return await getProductByIdApi(id);
+      setLoading(true);
+      const response = await getProductByIdApi(id);
+      return response?.retData ?? [];
+      //return await getProductByIdApi(id);
     } catch (error) {
       setError(error);
       return null;
