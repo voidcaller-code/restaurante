@@ -41,9 +41,10 @@ export function useOrder() {
 
   const addOrderToTable = async (idTable, idProduct) => {
     try {
-      await addOrderToTableApi(idTable, idProduct);
+      return await addOrderToTableApi(idTable, idProduct);
     } catch (error) {
       setError(error);
+      throw error;
     }
   };
 

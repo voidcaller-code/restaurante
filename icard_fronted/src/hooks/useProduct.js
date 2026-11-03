@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getProductsApi,
   addProductApi,
@@ -16,7 +16,7 @@ export function useProduct() {
 
   const { auth } = useAuth();
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     try {
       setLoading(true);
       const response = await getProductsApi();
@@ -26,7 +26,7 @@ export function useProduct() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const addProduct = async (data) => {
     try {

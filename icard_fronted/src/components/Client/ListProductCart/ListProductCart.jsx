@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button, Image } from 'react-bootstrap'
 import { FaTimes } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router'
@@ -10,6 +11,7 @@ import './ListProductCart.scss'
 
 export function ListProductCart(props) {
   const { products = [], onReloadCart } = props
+  const [submitting, setSubmitting] = useState(false)
 
   const { addOrderToTable } = useOrder()
 
@@ -32,15 +34,21 @@ export function ListProductCart(props) {
         return
       }
 
+      setSubmitting(true)
+
       for await (const product of products) {
         await addOrderToTable(idTable, product.id)
+        removeProductCartApi(0)
       }
 
       cleanProductCartApi()
       navigate(`/client/${idTable}/orders`)
     } catch (error) {
       console.error(error)
-      toast.error('Error al realizar el pedido')
+      onReloadCart()
+      toast.error(error.message || 'Error al realizar el pedido')
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -82,9 +90,9 @@ export function ListProductCart(props) {
         variant="primary"
         className="w-100 mt-3"
         onClick={createOrder}
-        disabled={products.length === 0}
+        disabled={products.length === 0 || submitting}
       >
-        Realizar pedido ({total} $)
+        {submitting ? 'Procesando pedido...' : `Realizar pedido (${total} $)`}
       </Button>
     </div>
   )

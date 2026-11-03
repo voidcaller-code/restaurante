@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { Button, Form, Image } from 'react-bootstrap'
+import { Alert, Button, Form, Image } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -15,7 +15,7 @@ export function AddOrderForm(props) {
 
   useEffect(() => {
     getProducts()
-  }, [])
+  }, [getProducts])
 
   const productsOptions = useMemo(() => {
     return products.map((product) => ({
@@ -28,16 +28,32 @@ export function AddOrderForm(props) {
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
-    onSubmit: async (formValue) => {
+    onSubmit: async (formValue, helpers) => {
+      let createdProducts = 0
+
       try {
+        helpers.setStatus(null)
+
         for await (const idProduct of formValue.products) {
           await addOrderToTable(idTable, idProduct)
+          createdProducts += 1
         }
 
         onReloadOrders()
         openCloseModal()
       } catch (error) {
         console.error(error)
+
+        if (createdProducts > 0) {
+          await helpers.setFieldValue(
+            'products',
+            formValue.products.slice(createdProducts),
+            false,
+          )
+          onReloadOrders()
+        }
+
+        helpers.setStatus(error.message || 'No fue posible crear el pedido.')
       }
     },
   })
@@ -68,6 +84,8 @@ export function AddOrderForm(props) {
 
   return (
     <Form className="add-order-form" onSubmit={formik.handleSubmit}>
+      {formik.status && <Alert variant="danger">{formik.status}</Alert>}
+
       <Form.Group className="mb-3">
         <Form.Label>Productos</Form.Label>
 
@@ -124,7 +142,12 @@ export function AddOrderForm(props) {
         )}
       </div>
 
-      <Button type="submit" variant="primary" className="w-100 mt-5">
+      <Button
+        type="submit"
+        variant="primary"
+        className="w-100 mt-5"
+        disabled={formik.isSubmitting}
+      >
         Añadir productos a la mesa
       </Button>
     </Form>
