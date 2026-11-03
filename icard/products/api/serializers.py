@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from products.models import Product
+from products.models import Product, BranchProduct
 from categories.api.serializers import CategorySerializer # Para poder serializar la información de la categoría asociada al producto
 
 class ProductSerializer(ModelSerializer):
@@ -24,4 +24,10 @@ class ProductSerializer(ModelSerializer):
 
     #     return value
 
-    
+
+class BranchProductSerializer(ModelSerializer):
+    product_data = ProductSerializer(source='product', read_only=True)
+
+    class Meta:
+        model = BranchProduct
+        fields = ['id', 'stock', 'active', 'branch','product', 'product_data']

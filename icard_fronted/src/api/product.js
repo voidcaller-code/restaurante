@@ -1,8 +1,9 @@
 import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
-export async function getProductsApi() {
-  const url = `${BASE_API}/api/v1/products/`;
+export async function getProductsApi(pageSize) {
+  const pageSizeFilter = pageSize ? `?page_size=${pageSize}` : "";
+  const url = `${BASE_API}/api/v1/products/${pageSizeFilter}`;
   return apiFetch(url);
 }
 

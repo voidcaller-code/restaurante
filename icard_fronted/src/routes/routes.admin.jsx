@@ -8,6 +8,7 @@ import {
   OrdersAdmin,
   TableDetailsAdmin,
   PaymentsHistory,
+  InventoryAdmin,
 } from '../pages/Admin'
 import { Error404 } from '../pages'
 
@@ -35,6 +36,10 @@ const routesAdmin = [
       {
         path: 'products',
         element: <ProductAdmin />,
+      },
+      {
+        path: 'inventory',
+        element: <InventoryAdmin />,
       },
       {
         path: 'tables',

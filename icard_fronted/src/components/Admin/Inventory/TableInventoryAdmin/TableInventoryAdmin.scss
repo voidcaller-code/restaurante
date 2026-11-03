@@ -1,0 +1,19 @@
+.table-inventory-admin {
+  &__stock-cell,
+  &__status-cell {
+    width: 120px;
+    white-space: nowrap;
+  }
+
+  &__actions-cell {
+    width: 130px;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}

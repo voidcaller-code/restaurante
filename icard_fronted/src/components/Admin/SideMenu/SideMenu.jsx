@@ -2,6 +2,7 @@ import { NavLink } from 'react-router'
 import { Nav } from 'react-bootstrap'
 import {
   FaFolder,
+  FaBoxes,
   FaHistory,
   FaHome,
   FaShoppingCart,
@@ -90,6 +91,18 @@ function MenuLeft() {
         >
           <FaShoppingCart />
           <span>Productos</span>
+        </NavLink>
+
+        <NavLink
+          to="/admin/inventory"
+          className={({ isActive }) =>
+            isActive
+              ? 'side-menu-admin__link side-menu-admin__link--active'
+              : 'side-menu-admin__link'
+          }
+        >
+          <FaBoxes />
+          <span>Inventario</span>
         </NavLink>
 
         {auth?.me?.retData?.is_staff && (

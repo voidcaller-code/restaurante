@@ -16,3 +16,26 @@ class Product(models.Model):
         verbose_name_plural = 'Productos'
         ordering = ['-id']
         db_table = 'products'
+
+class BranchProduct(models.Model):
+    branch = models.ForeignKey(
+        'branches.Branch',
+        on_delete=models.CASCADE,
+        related_name='inventory',
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='branch_inventory',
+    )
+    stock = models.PositiveIntegerField(default=0)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'branch_products'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['branch', 'product'],
+                name='unique_product_per_branch',
+            )
+        ]
