@@ -40,25 +40,25 @@ export function InventoryAdmin() {
   }
 
   const title = selectedBranch
-    ? `Inventario - ${selectedBranch.name}`
-    : 'Inventario'
+    ? `Inventory - ${selectedBranch.name}`
+    : 'Inventory'
 
   return (
     <>
       <HeaderPage
         title={title}
-        btnTitle={selectedBranch ? 'Agregar producto' : null}
+        btnTitle={selectedBranch ? 'Add product' : null}
         btnClick={openCreateModal}
       />
 
       {error && (
-        <Alert variant="danger">No fue posible cargar el inventario.</Alert>
+        <Alert variant="danger">Unable to load inventory.</Alert>
       )}
 
       {loadingBranches || (selectedBranch && loading) ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : selectedBranch ? (
         <TableInventoryAdmin
@@ -67,13 +67,13 @@ export function InventoryAdmin() {
           onRestock={openRestockModal}
         />
       ) : (
-        <Alert variant="warning">No hay una sede disponible.</Alert>
+        <Alert variant="warning">No branch is available.</Alert>
       )}
 
       <ModalBasic
         show={modal === 'create' || modal === 'edit'}
         onClose={closeModal}
-        title={modal === 'edit' ? 'Editar inventario' : 'Agregar producto'}
+        title={modal === 'edit' ? 'Edit inventory' : 'Add product'}
         size="small"
       >
         {(modal === 'create' || modal === 'edit') && (
@@ -90,7 +90,7 @@ export function InventoryAdmin() {
       <ModalBasic
         show={modal === 'restock'}
         onClose={closeModal}
-        title="Reponer stock"
+        title="Restock"
         size="small"
       >
         {selectedItem && (

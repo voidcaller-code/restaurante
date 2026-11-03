@@ -16,7 +16,7 @@ export function PaymentsHistory() {
   return (
     <>
       <HeaderPage
-        title={`Historial de pagos${
+        title={`Payment history${
           selectedBranch ? ` - ${selectedBranch.name}` : ''
         }`}
       />
@@ -24,12 +24,12 @@ export function PaymentsHistory() {
       {loadingBranches || (selectedBranch && loading) ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : !selectedBranch ? (
-        <Alert variant="warning">No hay una sede disponible.</Alert>
+        <Alert variant="warning">No branch is available.</Alert>
       ) : error ? (
-        <Alert variant="danger">No fue posible cargar los pagos.</Alert>
+        <Alert variant="danger">Unable to load payments.</Alert>
       ) : (
         <TablePayments payments={payments} />
       )}

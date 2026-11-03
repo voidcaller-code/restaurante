@@ -27,7 +27,7 @@ export function TablesAdmin() {
   const onRefetch = () => setRefetch((prev) => !prev)
 
   const addTable = () => {
-    setTitleModal('Crear mesa')
+    setTitleModal('Create table')
     setContentModal(
       <AddEditTableForm
         onClose={openCloseModal}
@@ -39,7 +39,7 @@ export function TablesAdmin() {
   }
 
   const updateTable = (data) => {
-    setTitleModal('Actualizar mesa')
+    setTitleModal('Update table')
     setContentModal(
       <AddEditTableForm
         onClose={openCloseModal}
@@ -51,7 +51,7 @@ export function TablesAdmin() {
   }
 
   const onDeleteTable = async (data) => {
-    const result = window.confirm(`¿Eliminar mesa ${data.id}?`)
+    const result = window.confirm(`Delete table ${data.id}?`)
 
     if (result) {
       await deleteTable(data.id)
@@ -62,15 +62,15 @@ export function TablesAdmin() {
   return (
     <>
       <HeaderPage
-        title={`Mesas${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
-        btnTitle={selectedBranch ? 'Crear nueva mesa' : null}
+        title={`Tables${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
+        btnTitle={selectedBranch ? 'Create new table' : null}
         btnClick={addTable}
       />
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <TableTablesAdmin

@@ -53,7 +53,7 @@ export function AddOrderForm(props) {
           onReloadOrders()
         }
 
-        helpers.setStatus(error.message || 'No fue posible crear el pedido.')
+        helpers.setStatus(error.message || 'Unable to create the order.')
       }
     },
   })
@@ -87,14 +87,14 @@ export function AddOrderForm(props) {
       {formik.status && <Alert variant="danger">{formik.status}</Alert>}
 
       <Form.Group className="mb-3">
-        <Form.Label>Productos</Form.Label>
+        <Form.Label>Products</Form.Label>
 
         <Form.Select
           defaultValue=""
           onChange={addProductToList}
           isInvalid={Boolean(formik.errors.products)}
         >
-          <option value="">Seleccione un producto</option>
+          <option value="">Select a product</option>
 
           {productsOptions.map((product) => (
             <option key={product.value} value={product.value}>
@@ -131,13 +131,13 @@ export function AddOrderForm(props) {
                 size="sm"
                 onClick={() => removeProductList(index)}
               >
-                Eliminar
+                Remove
               </Button>
             </div>
           ))
         ) : (
           <p className="text-muted mb-0">
-            No has seleccionado productos.
+            No products selected.
           </p>
         )}
       </div>
@@ -148,7 +148,7 @@ export function AddOrderForm(props) {
         className="w-100 mt-5"
         disabled={formik.isSubmitting}
       >
-        Añadir productos a la mesa
+        Add products to the table
       </Button>
     </Form>
   )
@@ -163,7 +163,7 @@ function initialValues() {
 function validationSchema() {
   return Yup.object({
     products: Yup.array()
-      .min(1, 'Debes seleccionar al menos un producto')
-      .required('Debes seleccionar al menos un producto'),
+      .min(1, 'Select at least one product')
+      .required('Select at least one product'),
   })
 }

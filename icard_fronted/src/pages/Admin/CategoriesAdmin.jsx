@@ -24,7 +24,7 @@ export function CategoriesAdmin() {
   const onRefetch = () => setRefetch((prev) => !prev)
 
   const addCategory = () => {
-    setTitleModal('Nueva categoría')
+    setTitleModal('New category')
     setContentModal(
       <AddEditCategoryForm onClose={openCloseModal} onRefetch={onRefetch} />
     )
@@ -32,7 +32,7 @@ export function CategoriesAdmin() {
   }
 
   const updateCategory = (data) => {
-    setTitleModal('Actualizar categoría')
+    setTitleModal('Update category')
     setContentModal(
       <AddEditCategoryForm
         onClose={openCloseModal}
@@ -44,7 +44,7 @@ export function CategoriesAdmin() {
   }
 
   const onDeleteCategory = async (data) => {
-    const result = window.confirm(`¿Eliminar categoría ${data.title}?`)
+    const result = window.confirm(`Delete category ${data.title}?`)
 
     if (result) {
       await deleteCategory(data.id)
@@ -55,15 +55,15 @@ export function CategoriesAdmin() {
   return (
     <>
       <HeaderPage
-        title="Categorías"
-        btnTitle="Nueva categoría"
+        title="Categories"
+        btnTitle="New category"
         btnClick={addCategory}
       />
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <TableCategoryAdmin

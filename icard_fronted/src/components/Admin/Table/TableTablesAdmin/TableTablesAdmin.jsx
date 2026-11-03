@@ -23,7 +23,7 @@ export function TableTablesAdmin(props) {
           size={220}
         />
 
-        <p className="mt-3 mb-0">Mesa {table.id}</p>
+        <p className="mt-3 mb-0">Table {table.id}</p>
       </div>
     )
 
@@ -41,10 +41,10 @@ export function TableTablesAdmin(props) {
       >
         <thead>
           <tr>
-            <th className="table-tables-admin__number-cell">ID de mesa</th>
-            <th className="table-tables-admin__type-cell">Tipo</th>
-            <th className="table-tables-admin__capacity-cell">Capacidad</th>
-            <th className="table-tables-admin__actions-cell">Acciones</th>
+            <th className="table-tables-admin__number-cell">Table ID</th>
+            <th className="table-tables-admin__type-cell">Type</th>
+            <th className="table-tables-admin__capacity-cell">Capacity</th>
+            <th className="table-tables-admin__actions-cell">Actions</th>
           </tr>
         </thead>
 
@@ -57,7 +57,7 @@ export function TableTablesAdmin(props) {
                 </td>
 
                 <td className="table-tables-admin__type-cell">
-                  {table.tipo_display}
+                  {getTableTypeLabel(table.tipo)}
                 </td>
 
                 <td className="table-tables-admin__capacity-cell">
@@ -77,7 +77,7 @@ export function TableTablesAdmin(props) {
           ) : (
             <tr>
               <td colSpan="4" className="text-center">
-                No hay mesas registradas.
+                No tables are registered.
               </td>
             </tr>
           )}
@@ -87,13 +87,21 @@ export function TableTablesAdmin(props) {
       <ModalBasic
         show={showModal}
         onClose={openCloseModal}
-        title="Código QR"
+        title="QR code"
         size="sm"
       >
         {contentModal}
       </ModalBasic>
     </>
   )
+}
+
+function getTableTypeLabel(type) {
+  return {
+    NI: 'Children',
+    ES: 'Standard',
+    VIP: 'VIP',
+  }[type] || type
 }
 
 function Actions(props) {

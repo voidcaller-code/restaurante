@@ -19,7 +19,7 @@ export function TopMenu() {
       return `${auth.me.retData.first_name} ${auth.me.retData.last_name}`
     }
 
-    return auth?.me?.retData?.email || 'Administrador'
+    return auth?.me?.retData?.email || 'Administrator'
   }
 
   return (
@@ -30,7 +30,7 @@ export function TopMenu() {
 
       <div className="top-menu-admin__right">
         <div className="top-menu-admin__branch">
-          <Form.Label htmlFor="admin-branch-select">Sede</Form.Label>
+          <Form.Label htmlFor="admin-branch-select">Branch</Form.Label>
           <Form.Select
             id="admin-branch-select"
             size="sm"
@@ -39,7 +39,7 @@ export function TopMenu() {
             disabled={loadingBranches || branches.length === 0}
           >
             {branches.length === 0 && (
-              <option value="">Sin sedes disponibles</option>
+              <option value="">No branches available</option>
             )}
             {branches.map((branch) => (
               <option key={branch.id} value={branch.id}>
@@ -49,7 +49,7 @@ export function TopMenu() {
           </Form.Select>
         </div>
 
-        <span>Hola, {renderName()}</span>
+        <span>Hello, {renderName()}</span>
 
         <Button
           type="button"

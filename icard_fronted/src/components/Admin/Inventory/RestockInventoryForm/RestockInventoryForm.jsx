@@ -15,11 +15,11 @@ export function RestockInventoryForm(props) {
     initialValues: { quantity: 1 },
     validationSchema: Yup.object({
       quantity: Yup.number()
-        .typeError('La cantidad debe ser un número')
-        .integer('La cantidad debe ser un número entero')
-        .min(1, 'La cantidad debe ser mayor que cero')
-        .max(maximumQuantity, 'La cantidad supera el stock permitido')
-        .required('La cantidad es obligatoria'),
+        .typeError('Quantity must be a number')
+        .integer('Quantity must be an integer')
+        .min(1, 'Quantity must be greater than zero')
+        .max(maximumQuantity, 'Quantity exceeds the allowed stock')
+        .required('Quantity is required'),
     }),
     validateOnChange: false,
     onSubmit: async (values, helpers) => {
@@ -32,7 +32,7 @@ export function RestockInventoryForm(props) {
         onClose()
       } catch (requestError) {
         helpers.setStatus(
-          requestError.message || 'No fue posible reponer el producto.',
+          requestError.message || 'Unable to restock the product.',
         )
       }
     },
@@ -45,10 +45,10 @@ export function RestockInventoryForm(props) {
       <p className="mb-1">
         <strong>{inventoryItem.product_data?.title}</strong>
       </p>
-      <p className="text-muted">Stock actual: {inventoryItem.stock}</p>
+      <p className="text-muted">Current stock: {inventoryItem.stock}</p>
 
       <Form.Group className="mb-3">
-        <Form.Label>Unidades a agregar</Form.Label>
+        <Form.Label>Units to add</Form.Label>
         <Form.Control
           name="quantity"
           type="number"
@@ -64,7 +64,7 @@ export function RestockInventoryForm(props) {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <p>Nuevo stock: {inventoryItem.stock + Number(formik.values.quantity || 0)}</p>
+      <p>New stock: {inventoryItem.stock + Number(formik.values.quantity || 0)}</p>
 
       <Button
         type="submit"
@@ -75,7 +75,7 @@ export function RestockInventoryForm(props) {
         {formik.isSubmitting ? (
           <Spinner animation="border" size="sm" />
         ) : (
-          'Reponer stock'
+          'Restock'
         )}
       </Button>
     </Form>

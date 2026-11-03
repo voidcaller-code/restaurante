@@ -19,11 +19,11 @@ export function TableUsers(props) {
           <th>ID</th>
           <th>Username</th>
           <th>Email</th>
-          <th>Nombre</th>
-          <th>Apellidos</th>
-          <th>Activo</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Active</th>
           <th>Staff</th>
-          <th>Acciones</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -65,7 +65,7 @@ export function TableUsers(props) {
         ) : (
           <tr>
             <td colSpan="7" className="text-center">
-              No hay usuarios registrados.
+              No users are registered.
             </td>
           </tr>
         )}

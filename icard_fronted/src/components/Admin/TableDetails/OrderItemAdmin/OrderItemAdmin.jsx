@@ -28,7 +28,7 @@ export function OrderItemAdmin(props) {
         {image ? (
           <Image
             src={image}
-            alt={title || 'Producto del pedido'}
+            alt={title || 'Ordered product'}
             className="order-item-admin__image"
           />
         ) : (
@@ -40,13 +40,13 @@ export function OrderItemAdmin(props) {
         <div className="order-item-admin__header">
           <div>
             <h3 className="order-item-admin__title">
-              {title || 'Producto no disponible'}
+              {title || 'Product unavailable'}
             </h3>
           </div>
 
           <span className="order-item-admin__status">
             <span className="order-item-admin__status-dot" aria-hidden="true" />
-            {isPending ? 'Pendiente' : 'Entregado'}
+            {isPending ? 'Pending' : 'Delivered'}
           </span>
         </div>
 
@@ -77,7 +77,7 @@ export function OrderItemAdmin(props) {
               onClick={onCheckDeliveredOrder}
             >
               <FaCheck aria-hidden="true" />
-              Marcar entregado
+              Mark as delivered
             </Button>
           )}
         </div>
@@ -87,13 +87,13 @@ export function OrderItemAdmin(props) {
 }
 
 function formatPrice(price) {
-  return `$${Number(price).toLocaleString('es-CO')}`
+  return `$${Number(price).toLocaleString('en-US')}`
 }
 
 function formatHour(date) {
   if (!date) return ''
 
-  return new Intl.DateTimeFormat('es-CO', {
+  return new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(date))
@@ -110,9 +110,9 @@ function formatTimeAgo(date) {
   const diffHours = Math.floor(diffMinutes / 60)
   const diffDays = Math.floor(diffHours / 24)
 
-  if (diffMinutes < 1) return 'hace unos segundos'
-  if (diffMinutes < 60) return `hace ${diffMinutes} min`
-  if (diffHours < 24) return `hace ${diffHours} h`
+  if (diffMinutes < 1) return 'a few seconds ago'
+  if (diffMinutes < 60) return `${diffMinutes} min ago`
+  if (diffHours < 24) return `${diffHours} h ago`
 
-  return `hace ${diffDays} día${diffDays > 1 ? 's' : ''}`
+  return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
 }

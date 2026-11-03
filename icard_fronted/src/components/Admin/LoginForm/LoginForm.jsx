@@ -25,11 +25,11 @@ export function LoginForm() {
 
         await login(access)
 
-        toast.success('Sesión iniciada correctamente')
+        toast.success('Signed in successfully')
 
         navigate('/admin')
-      } catch (error) {
-        toast.error('Usuario o contraseña incorrectos')
+      } catch {
+        toast.error('Incorrect email or password')
       }
     },
   })
@@ -40,7 +40,7 @@ export function LoginForm() {
         <Form.Control
           name="email"
           type="email"
-          placeholder="Correo electrónico"
+          placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.email)}
@@ -55,7 +55,7 @@ export function LoginForm() {
         <Form.Control
           name="password"
           type="password"
-          placeholder="Contraseña"
+          placeholder="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.password)}
@@ -67,7 +67,7 @@ export function LoginForm() {
       </Form.Group>
 
       <Button type="submit" variant="primary" className="w-100">
-        Iniciar sesión
+        Sign in
       </Button>
     </Form>
   )
@@ -83,10 +83,10 @@ function initialValues() {
 function validationSchema() {
   return Yup.object({
     email: Yup.string()
-      .email('El correo electrónico no es válido')
-      .required('El correo electrónico es obligatorio'),
+      .email('Enter a valid email address')
+      .required('Email is required'),
 
     password: Yup.string()
-      .required('La contraseña es obligatoria'),
+      .required('Password is required'),
   })
 }

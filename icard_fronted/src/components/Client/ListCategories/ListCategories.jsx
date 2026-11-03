@@ -35,7 +35,7 @@ export function ListCategories(props) {
           </button>
         ))
       ) : (
-        <p className="text-muted">No hay categorías disponibles.</p>
+        <p className="text-muted">No categories are available.</p>
       )}
     </div>
   )

@@ -24,7 +24,7 @@ export function ProductAdmin() {
   const onRefetch = () => setRefetch((prev) => !prev)
 
   const addProduct = () => {
-    setTitleModal('Nuevo producto')
+    setTitleModal('New product')
     setContentModal(
       <AddEditProductForm onClose={openCloseModal} onRefetch={onRefetch} />
     )
@@ -32,7 +32,7 @@ export function ProductAdmin() {
   }
 
   const updateProduct = (data) => {
-    setTitleModal('Actualizar producto')
+    setTitleModal('Update product')
     setContentModal(
       <AddEditProductForm
         onClose={openCloseModal}
@@ -44,7 +44,7 @@ export function ProductAdmin() {
   }
 
   const onDeleteProduct = async (data) => {
-    const result = window.confirm(`¿Eliminar producto ${data.title}?`)
+    const result = window.confirm(`Delete product ${data.title}?`)
 
     if (result) {
       await deleteProduct(data.id)
@@ -55,15 +55,15 @@ export function ProductAdmin() {
   return (
     <>
       <HeaderPage
-        title="Productos"
-        btnTitle="Nuevo producto"
+        title="Products"
+        btnTitle="New product"
         btnClick={addProduct}
       />
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <TableProductAdmin

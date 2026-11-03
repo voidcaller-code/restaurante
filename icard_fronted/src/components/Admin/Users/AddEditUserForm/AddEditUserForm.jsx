@@ -42,12 +42,12 @@ export function AddEditUserForm(props) {
   return (
     <Form className="add-edit-user-form" onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
-        <Form.Label>Nombre de usuario</Form.Label>
+        <Form.Label>Username</Form.Label>
 
         <Form.Control
           name="username"
           type="text"
-          placeholder="Nombre de usuario"
+          placeholder="Username"
           value={formik.values.username}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.username)}
@@ -59,12 +59,12 @@ export function AddEditUserForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Correo electrónico</Form.Label>
+        <Form.Label>Email</Form.Label>
 
         <Form.Control
           name="email"
           type="email"
-          placeholder="Correo electrónico"
+          placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.email)}
@@ -76,12 +76,12 @@ export function AddEditUserForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Nombre</Form.Label>
+        <Form.Label>First name</Form.Label>
 
         <Form.Control
           name="first_name"
           type="text"
-          placeholder="Nombre"
+          placeholder="First name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.first_name)}
@@ -93,12 +93,12 @@ export function AddEditUserForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Apellidos</Form.Label>
+        <Form.Label>Last name</Form.Label>
 
         <Form.Control
           name="last_name"
           type="text"
-          placeholder="Apellidos"
+          placeholder="Last name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.last_name)}
@@ -110,15 +110,15 @@ export function AddEditUserForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Contraseña</Form.Label>
+        <Form.Label>Password</Form.Label>
 
         <Form.Control
           name="password"
           type="password"
           placeholder={
             user
-              ? 'Dejar vacío para no cambiar la contraseña'
-              : 'Contraseña'
+              ? 'Leave blank to keep the current password'
+              : 'Password'
           }
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -134,7 +134,7 @@ export function AddEditUserForm(props) {
         <Form.Check
           type="switch"
           id="user-is-active"
-          label="Usuario activo"
+          label="Active user"
           checked={formik.values.is_active}
           onChange={(event) =>
             formik.setFieldValue('is_active', event.target.checked)
@@ -146,7 +146,7 @@ export function AddEditUserForm(props) {
         <Form.Check
           type="switch"
           id="user-is-staff"
-          label="Usuario administrador"
+          label="Administrator"
           checked={formik.values.is_staff}
           onChange={(event) =>
             formik.setFieldValue('is_staff', event.target.checked)
@@ -155,7 +155,7 @@ export function AddEditUserForm(props) {
       </Form.Group>
 
       <Button type="submit" variant="primary" className="w-100">
-        {user ? 'Actualizar' : 'Crear'}
+        {user ? 'Update' : 'Create'}
       </Button>
     </Form>
   )
@@ -175,13 +175,13 @@ function initialValues(data) {
 
 function newSchema() {
   return Yup.object({
-    username: Yup.string().required('El nombre de usuario es obligatorio'),
+    username: Yup.string().required('Username is required'),
     email: Yup.string()
-      .email('El correo electrónico no es válido')
-      .required('El correo electrónico es obligatorio'),
+      .email('Enter a valid email address')
+      .required('Email is required'),
     first_name: Yup.string(),
     last_name: Yup.string(),
-    password: Yup.string().required('La contraseña es obligatoria'),
+    password: Yup.string().required('Password is required'),
     is_active: Yup.boolean().required(),
     is_staff: Yup.boolean().required(),
   })
@@ -189,10 +189,10 @@ function newSchema() {
 
 function updateSchema() {
   return Yup.object({
-    username: Yup.string().required('El nombre de usuario es obligatorio'),
+    username: Yup.string().required('Username is required'),
     email: Yup.string()
-      .email('El correo electrónico no es válido')
-      .required('El correo electrónico es obligatorio'),
+      .email('Enter a valid email address')
+      .required('Email is required'),
     first_name: Yup.string(),
     last_name: Yup.string(),
     password: Yup.string(),

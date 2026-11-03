@@ -6,8 +6,8 @@ import { ORDER_STATUS } from '../../../utils/constants'
 import './OrderHistoryItem.scss'
 
 const ORDER_STATUS_LABELS = {
-  [ORDER_STATUS.PENDING]: 'Pendiente',
-  [ORDER_STATUS.DELIVERED]: 'Entregado',
+  [ORDER_STATUS.PENDING]: 'Pending',
+  [ORDER_STATUS.DELIVERED]: 'Delivered',
 }
 
 export function OrderHistoryItem(props) {
@@ -24,7 +24,7 @@ export function OrderHistoryItem(props) {
         {image ? (
           <Image
             src={image}
-            alt={title || 'Producto del pedido'}
+            alt={title || 'Ordered product'}
             className="order-history-item__image"
           />
         ) : (
@@ -39,7 +39,7 @@ export function OrderHistoryItem(props) {
         <div className="order-history-item__header">
           <div>
             <h3 className="order-history-item__title">
-              {title || 'Producto no disponible'}
+              {title || 'Product unavailable'}
             </h3>
           </div>
 
@@ -72,17 +72,17 @@ export function OrderHistoryItem(props) {
 }
 
 function getStatusLabel(status) {
-  return ORDER_STATUS_LABELS[status] || 'Sin estado'
+  return ORDER_STATUS_LABELS[status] || 'No status'
 }
 
 function formatPrice(price) {
-  return `$${Number(price).toLocaleString('es-CO')}`
+  return `$${Number(price).toLocaleString('en-US')}`
 }
 
 function formatHour(date) {
   if (!date) return ''
 
-  return new Intl.DateTimeFormat('es-CO', {
+  return new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(date))
@@ -99,9 +99,9 @@ function formatTimeAgo(date) {
   const diffHours = Math.floor(diffMinutes / 60)
   const diffDays = Math.floor(diffHours / 24)
 
-  if (diffMinutes < 1) return 'hace unos segundos'
-  if (diffMinutes < 60) return `hace ${diffMinutes} min`
-  if (diffHours < 24) return `hace ${diffHours} h`
+  if (diffMinutes < 1) return 'a few seconds ago'
+  if (diffMinutes < 60) return `${diffMinutes} min ago`
+  if (diffHours < 24) return `${diffHours} h ago`
 
-  return `hace ${diffDays} día${diffDays > 1 ? 's' : ''}`
+  return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
 }

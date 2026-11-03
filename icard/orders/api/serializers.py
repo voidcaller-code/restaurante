@@ -22,7 +22,7 @@ class OrderSerializer(ModelSerializer):
 
         if table is None or product is None:
             raise serializers.ValidationError({
-                'detail': 'La mesa y el producto son obligatorios.'
+                'detail': 'Table and product are required.'
             })
 
         try:
@@ -33,19 +33,18 @@ class OrderSerializer(ModelSerializer):
         except BranchProduct.DoesNotExist as error:
             raise serializers.ValidationError({
                 'detail': (
-                    'El producto no está registrado en el inventario '
-                    'de esta sede.'
+                    'The product is not registered in this branch inventory.'
                 )
             }) from error
 
         if not product.active or not inventory.active:
             raise serializers.ValidationError({
-                'detail': 'El producto no está disponible en esta sede.'
+                'detail': 'The product is not available at this branch.'
             })
 
         if inventory.stock < 1:
             raise serializers.ValidationError({
-                'detail': 'No hay stock disponible para este producto.'
+                'detail': 'There is no stock available for this product.'
             })
 
         inventory.stock -= 1

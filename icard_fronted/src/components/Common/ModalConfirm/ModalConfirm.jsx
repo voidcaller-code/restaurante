@@ -8,10 +8,10 @@ export function ModalConfirm(props) {
     show,
     onClose,
     onCancel = onClose,
-    onCloseText = 'Cancelar',
+    onCloseText = 'Cancel',
     onCloseVariant = 'danger',
     onConfirm,
-    onConfirmText = 'Aceptar',
+    onConfirmText = 'Accept',
     onConfirmVariant = 'success',
   } = props
 

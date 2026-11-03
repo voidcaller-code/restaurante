@@ -67,12 +67,12 @@ export function AddEditProductForm(props) {
   return (
     <Form className="add-edit-product-form" onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
-        <Form.Label>Nombre del producto</Form.Label>
+        <Form.Label>Product name</Form.Label>
 
         <Form.Control
           name="title"
           type="text"
-          placeholder="Nombre del producto"
+          placeholder="Product name"
           value={formik.values.title}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.title)}
@@ -84,12 +84,12 @@ export function AddEditProductForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Precio</Form.Label>
+        <Form.Label>Price</Form.Label>
 
         <Form.Control
           name="price"
           type="number"
-          placeholder="Precio"
+          placeholder="Price"
           value={formik.values.price}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.price)}
@@ -101,7 +101,7 @@ export function AddEditProductForm(props) {
       </Form.Group>
       
       <Form.Group className="mb-3">
-        <Form.Label>Categoría</Form.Label>
+        <Form.Label>Category</Form.Label>
 
         <Form.Select
           name="category"
@@ -116,7 +116,7 @@ export function AddEditProductForm(props) {
           }}
           isInvalid={Boolean(formik.errors.category)}
         >
-          <option value="">Seleccione una categoría</option>
+          <option value="">Select a category</option>
 
           {categoryList.map((category) => (
             <option
@@ -138,7 +138,7 @@ export function AddEditProductForm(props) {
         <Form.Check
           type="switch"
           id="product-active"
-          label="Producto activo"
+          label="Active product"
           checked={formik.values.active}
           onChange={(event) =>
             formik.setFieldValue('active', event.target.checked)
@@ -147,7 +147,7 @@ export function AddEditProductForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Imagen</Form.Label>
+        <Form.Label>Image</Form.Label>
 
         <div
           {...getRootProps()}
@@ -158,7 +158,7 @@ export function AddEditProductForm(props) {
           <input {...getInputProps()} />
 
           <Button type="button" variant={formik.errors.image ? 'danger' : 'outline-primary'}>
-            {previewImage ? 'Cambiar imagen' : 'Subir imagen'}
+            {previewImage ? 'Change image' : 'Upload image'}
           </Button>
         </div>
 
@@ -171,7 +171,7 @@ export function AddEditProductForm(props) {
         {previewImage && (
           <Image
             src={previewImage}
-            alt="Vista previa del producto"
+            alt="Product preview"
             fluid
             thumbnail
             className="add-edit-product-form__image"
@@ -180,7 +180,7 @@ export function AddEditProductForm(props) {
       </Form.Group>
 
       <Button type="submit" variant="primary" className="w-100 mt-4">
-        {product ? 'Actualizar' : 'Crear'}
+        {product ? 'Update' : 'Create'}
       </Button>
     </Form>
   )
@@ -198,27 +198,27 @@ function initialValues(data) {
 
 function newSchema() {
   return Yup.object({
-    title: Yup.string().required('El nombre del producto es obligatorio'),
+    title: Yup.string().required('Product name is required'),
     price: Yup.number()
-      .typeError('El precio debe ser un número')
-      .required('El precio es obligatorio'),
+      .typeError('Price must be a number')
+      .required('Price is required'),
     category: Yup.number()
-      .typeError('La categoría es obligatoria')
-      .required('La categoría es obligatoria'),
+      .typeError('Category is required')
+      .required('Category is required'),
     active: Yup.boolean().required(),
-    image: Yup.mixed().required('La imagen es obligatoria'),
+    image: Yup.mixed().required('Image is required'),
   })
 }
 
 function updateSchema() {
   return Yup.object({
-    title: Yup.string().required('El nombre del producto es obligatorio'),
+    title: Yup.string().required('Product name is required'),
     price: Yup.number()
-      .typeError('El precio debe ser un número')
-      .required('El precio es obligatorio'),
+      .typeError('Price must be a number')
+      .required('Price is required'),
     category: Yup.number()
-      .typeError('La categoría es obligatoria')
-      .required('La categoría es obligatoria'),
+      .typeError('Category is required')
+      .required('Category is required'),
     active: Yup.boolean().required(),
     image: Yup.mixed().nullable(),
   })

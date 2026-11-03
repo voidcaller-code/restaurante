@@ -11,22 +11,22 @@ export function Error404() {
         <FaExclamationTriangle className="error-404__icon" />
 
         <h1>404</h1>
-        <h2>Página no encontrada</h2>
+        <h2>Page not found</h2>
 
         <p>
-          La página que estás intentando abrir no existe o fue movida.
+          The page you are trying to open does not exist or has been moved.
         </p>
 
         <div className="error-404__actions">
           {/* <Link to="/">
             <Button variant="primary">
-              Volver al inicio
+              Back to home
             </Button>
           </Link> */}
 
           <Link to="/admin">
             <Button variant="primary">
-              Ir al panel admin
+              Go to admin panel
             </Button>
           </Link>
         </div>

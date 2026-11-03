@@ -16,18 +16,18 @@ export function OrdersAdmin() {
   return (
     <>
       <HeaderPage
-        title={`Pedidos${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
+        title={`Orders${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
       />
 
       {loadingBranches || (selectedBranch && loading) ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : !selectedBranch ? (
-        <Alert variant="warning">No hay una sede disponible.</Alert>
+        <Alert variant="warning">No branch is available.</Alert>
       ) : error ? (
-        <Alert variant="danger">No fue posible cargar los pedidos.</Alert>
+        <Alert variant="danger">Unable to load orders.</Alert>
       ) : (
         <TablesListAdmin tables={tables} />
       )}

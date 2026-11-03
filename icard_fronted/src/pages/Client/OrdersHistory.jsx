@@ -85,12 +85,12 @@ export function OrdersHistory() {
 
   return (
     <div>
-      <h1>Historial de pedidos</h1>
+      <h1>Order history</h1>
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <>
@@ -103,8 +103,8 @@ export function OrdersHistory() {
               }
             >
               {isRequestAccount.length > 0
-                ? 'La cuenta ya está pedida'
-                : 'Pedir la cuenta'}
+                ? 'The bill has already been requested'
+                : 'Request the bill'}
             </Button>
           )}
 
@@ -116,17 +116,17 @@ export function OrdersHistory() {
               />
             ))
           ) : (
-            <p className="text-muted mt-3">No tienes pedidos registrados.</p>
+            <p className="text-muted mt-3">You have no orders.</p>
           )}
         </>
       )}
 
       <ModalConfirm
-        title="Pagar con tarjeta o efectivo"
+        title="Pay by card or cash"
         show={showTypePayment}
-        onCloseText="Efectivo"
+        onCloseText="Cash"
         onClose={() => onCreatePayment(PAYMENT_TYPE.CASH)}
-        onConfirmText="Tarjeta"
+        onConfirmText="Card"
         onConfirm={() => onCreatePayment(PAYMENT_TYPE.CARD)}
       />
     </div>

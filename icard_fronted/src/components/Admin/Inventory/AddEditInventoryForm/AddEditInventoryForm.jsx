@@ -77,7 +77,7 @@ export function AddEditInventoryForm(props) {
         onClose()
       } catch (requestError) {
         helpers.setStatus(
-          requestError.message || 'No fue posible guardar el inventario.',
+          requestError.message || 'Unable to save inventory.',
         )
       }
     },
@@ -87,20 +87,20 @@ export function AddEditInventoryForm(props) {
     <Form onSubmit={formik.handleSubmit}>
       {formik.status && <Alert variant="danger">{formik.status}</Alert>}
       {productsError && (
-        <Alert variant="danger">No fue posible cargar los productos.</Alert>
+        <Alert variant="danger">Unable to load products.</Alert>
       )}
 
       {inventoryItem ? (
         <Form.Group className="mb-3">
-          <Form.Label>Producto</Form.Label>
+          <Form.Label>Product</Form.Label>
           <Form.Control
-            value={inventoryItem.product_data?.title || 'Producto no disponible'}
+            value={inventoryItem.product_data?.title || 'Product unavailable'}
             disabled
           />
         </Form.Group>
       ) : (
         <Form.Group className="mb-3">
-          <Form.Label>Producto</Form.Label>
+          <Form.Label>Product</Form.Label>
           <Form.Select
             name="product"
             value={formik.values.product}
@@ -115,8 +115,8 @@ export function AddEditInventoryForm(props) {
           >
             <option value="">
               {loadingProducts
-                ? 'Cargando productos...'
-                : 'Seleccione un producto'}
+                ? 'Loading products...'
+                : 'Select a product'}
             </option>
             {availableProducts.map((product) => (
               <option key={product.id} value={product.id}>
@@ -128,7 +128,7 @@ export function AddEditInventoryForm(props) {
             {formik.errors.product}
           </Form.Control.Feedback>
           {!loadingProducts && availableProducts.length === 0 && (
-            <Form.Text>No hay productos activos pendientes por agregar.</Form.Text>
+            <Form.Text>There are no active products left to add.</Form.Text>
           )}
         </Form.Group>
       )}
@@ -153,7 +153,7 @@ export function AddEditInventoryForm(props) {
         <Form.Check
           type="switch"
           id="inventory-active"
-          label="Disponible en esta sede"
+          label="Available at this branch"
           checked={formik.values.active}
           onChange={(event) =>
             formik.setFieldValue('active', event.target.checked)
@@ -173,9 +173,9 @@ export function AddEditInventoryForm(props) {
         {formik.isSubmitting ? (
           <Spinner animation="border" size="sm" />
         ) : inventoryItem ? (
-          'Actualizar'
+          'Update'
         ) : (
-          'Agregar al inventario'
+          'Add to inventory'
         )}
       </Button>
     </Form>
@@ -195,14 +195,14 @@ function validationSchema(isEditing) {
     product: isEditing
       ? Yup.number().nullable()
       : Yup.number()
-          .typeError('Seleccione un producto')
-          .required('Seleccione un producto'),
+          .typeError('Select a product')
+          .required('Select a product'),
     stock: Yup.number()
-      .typeError('El stock debe ser un número')
-      .integer('El stock debe ser un número entero')
-      .min(0, 'El stock no puede ser negativo')
-      .max(MAX_STOCK, 'El stock es demasiado alto')
-      .required('El stock es obligatorio'),
+      .typeError('Stock must be a number')
+      .integer('Stock must be an integer')
+      .min(0, 'Stock cannot be negative')
+      .max(MAX_STOCK, 'Stock is too high')
+      .required('Stock is required'),
     active: Yup.boolean().required(),
   })
 }

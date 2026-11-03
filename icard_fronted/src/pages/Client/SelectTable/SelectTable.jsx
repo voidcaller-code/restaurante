@@ -19,7 +19,7 @@ export function SelectTable() {
     setError(null)
 
     if (!idTable) {
-      setError('No has introducido ninguna mesa')
+      setError('Enter a table ID')
       return
     }
 
@@ -28,20 +28,20 @@ export function SelectTable() {
     if (exist) {
       navigate(`/client/${idTable}`)
     } else {
-      setError('El identificador de la mesa no existe')
+      setError('The table ID does not exist')
     }
   }
 
   return (
     <div className="select-table">
       <div className="select-table__content">
-        <h1>Bienvenido a iCard</h1>
-        <h2>Introduce el identificador de tu mesa</h2>
+        <h1>Welcome to iCard</h1>
+        <h2>Enter your table ID</h2>
 
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
-              placeholder="Ejemplo: 1"
+              placeholder="Example: 1"
               type="number"
               value={idTable}
               onChange={(event) => setIdTable(event.target.value)}
@@ -49,7 +49,7 @@ export function SelectTable() {
           </Form.Group>
 
           <Button type="submit" variant="primary" className="w-100">
-            Entrar
+            Enter
           </Button>
         </Form>
 

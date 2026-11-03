@@ -15,7 +15,7 @@ export function ListOrderAdmin(props) {
           />
         ))
       ) : (
-        <p className="text-muted">No hay pedidos para esta mesa.</p>
+        <p className="text-muted">There are no orders for this table.</p>
       )}
     </div>
   )

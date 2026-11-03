@@ -40,7 +40,7 @@ export function ClientLayout() {
           </Link>
 
           <span>
-            {idTable ? `Mesa ${idTable}` : 'Restaurante'}
+            {idTable ? `Table ${idTable}` : 'Restaurant'}
           </span>
           
           <div className="client-layout__actions">
@@ -53,7 +53,7 @@ export function ClientLayout() {
             </Button>
 
             <Button variant="outline-danger" size="sm" onClick={closeTable}>
-              <FaSignOutAlt /> Salir
+              <FaSignOutAlt /> Exit
             </Button>
           </div>
         </div>

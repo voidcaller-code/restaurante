@@ -44,7 +44,7 @@ export function PaymentProductList(props) {
           </div>
         ))
       ) : (
-        <p className="text-muted mb-0">No hay productos asociados a este pago.</p>
+        <p className="text-muted mb-0">No products are associated with this payment.</p>
       )}
     </div>
   )

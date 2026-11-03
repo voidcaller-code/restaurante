@@ -20,14 +20,14 @@ export function PaymentDetail(props) {
   }
 
   const getPaymentName = (key) => {
-    if (key === PAYMENT_TYPE.CARD) return 'Tarjeta'
-    if (key === PAYMENT_TYPE.CASH) return 'Efectivo'
+    if (key === PAYMENT_TYPE.CARD) return 'Card'
+    if (key === PAYMENT_TYPE.CASH) return 'Cash'
 
-    return 'No definido'
+    return 'Not defined'
   }
 
   const onCloseTable = async () => {
-    const result = window.confirm('¿Cerrar mesa para nuevos clientes?')
+    const result = window.confirm('Close the table for new customers?')
 
     if (!result) return
 
@@ -46,7 +46,7 @@ export function PaymentDetail(props) {
       <Table striped bordered className="align-middle">
         <tbody>
           <tr>
-            <td>Mesa:</td>
+            <td>Table:</td>
             <td>{payment.table_data.id}</td>
           </tr>
 
@@ -56,7 +56,7 @@ export function PaymentDetail(props) {
           </tr>
 
           <tr>
-            <td>Forma de pago:</td>
+            <td>Payment method:</td>
             <td className="payment-detail__payment-type">
               {getIconPayment(payment.paymentType)}
               <span>{getPaymentName(payment.paymentType)}</span>
@@ -66,7 +66,7 @@ export function PaymentDetail(props) {
       </Table>
 
       <Button variant="primary" className="w-100" onClick={onCloseTable}>
-        Marcar como pagado y cerrar mesa
+        Mark as paid and close table
       </Button>
     </div>
   )

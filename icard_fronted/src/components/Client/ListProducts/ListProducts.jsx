@@ -15,12 +15,12 @@ export function ListProducts(props) {
     ).length
 
     if (quantityInCart >= product.stock) {
-      toast.warning(`Solo hay ${product.stock} unidades disponibles`)
+      toast.warning(`Only ${product.stock} units are available`)
       return
     }
 
     addProductCart(product.id)
-    toast.success(`${product.title} añadido al carrito`)
+    toast.success(`${product.title} added to the cart`)
   }
 
   return (
@@ -40,7 +40,7 @@ export function ListProducts(props) {
               <div className="list-products-client__details">
                 <span>{product.title}</span>
                 <Badge bg="light" text="dark">
-                  Disponibles: {product.stock}
+                  Available: {product.stock}
                 </Badge>
               </div>
             </div>
@@ -56,7 +56,7 @@ export function ListProducts(props) {
           </div>
         ))
       ) : (
-        <p className="text-muted">No hay productos disponibles.</p>
+        <p className="text-muted">No products are available.</p>
       )}
     </div>
   )

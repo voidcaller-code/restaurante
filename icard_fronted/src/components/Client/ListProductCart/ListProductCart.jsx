@@ -30,7 +30,7 @@ export function ListProductCart(props) {
   const createOrder = async () => {
     try {
       if (products.length === 0) {
-        toast.warning('El carrito está vacío')
+        toast.warning('The cart is empty')
         return
       }
 
@@ -46,7 +46,7 @@ export function ListProductCart(props) {
     } catch (error) {
       console.error(error)
       onReloadCart()
-      toast.error(error.message || 'Error al realizar el pedido')
+      toast.error(error.message || 'Unable to place the order')
     } finally {
       setSubmitting(false)
     }
@@ -82,7 +82,7 @@ export function ListProductCart(props) {
           </div>
         ))
       ) : (
-        <p className="text-muted">No hay productos en el carrito.</p>
+        <p className="text-muted">There are no products in the cart.</p>
       )}
 
       <Button
@@ -92,7 +92,7 @@ export function ListProductCart(props) {
         onClick={createOrder}
         disabled={products.length === 0 || submitting}
       >
-        {submitting ? 'Procesando pedido...' : `Realizar pedido (${total} $)`}
+        {submitting ? 'Processing order...' : `Place order (${total} $)`}
       </Button>
     </div>
   )

@@ -29,15 +29,15 @@ export function TableCategoryAdmin(props) {
           </th>
 
           <th className="table-category-admin__image-cell">
-            Imagen
+            Image
           </th>
 
           <th>
-            Categoría
+            Category
           </th>
 
           <th className="table-category-admin__actions-cell">
-            Acciones
+            Actions
           </th>
         </tr>
       </thead>
@@ -59,7 +59,7 @@ export function TableCategoryAdmin(props) {
                     thumbnail
                   />
                 ) : (
-                  <span>Sin imagen</span>
+                  <span>No image</span>
                 )}
               </td>
 
@@ -82,7 +82,7 @@ export function TableCategoryAdmin(props) {
               colSpan="4"
               className="text-center"
             >
-              No hay categorías registradas.
+              No categories are registered.
             </td>
           </tr>
         )}

@@ -13,7 +13,7 @@ export function LoginAdmin() {
   return (
     <div className="login-admin">
       <div className="login-admin__content">
-        <h1>Entrar al panel</h1>
+        <h1>Access the panel</h1>
         <LoginForm />
       </div>
     </div>

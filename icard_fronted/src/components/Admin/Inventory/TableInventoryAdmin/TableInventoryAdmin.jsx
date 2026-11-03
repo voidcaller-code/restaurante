@@ -16,11 +16,11 @@ export function TableInventoryAdmin(props) {
     >
       <thead className="text-center">
         <tr>
-          <th>Producto</th>
-          <th>Categoría</th>
+          <th>Product</th>
+          <th>Category</th>
           <th className="table-inventory-admin__stock-cell">Stock</th>
-          <th className="table-inventory-admin__status-cell">Estado</th>
-          <th className="table-inventory-admin__actions-cell">Acciones</th>
+          <th className="table-inventory-admin__status-cell">Status</th>
+          <th className="table-inventory-admin__actions-cell">Actions</th>
         </tr>
       </thead>
 
@@ -28,14 +28,14 @@ export function TableInventoryAdmin(props) {
         {inventory.length > 0 ? (
           inventory.map((item) => (
             <tr key={item.id}>
-              <td>{item.product_data?.title || 'Producto no disponible'}</td>
-              <td>{item.product_data?.category_data?.title || 'Sin categoría'}</td>
+              <td>{item.product_data?.title || 'Product unavailable'}</td>
+              <td>{item.product_data?.category_data?.title || 'No category'}</td>
               <td>
                 <Badge bg={stockVariant(item.stock)}>{item.stock}</Badge>
               </td>
               <td>
                 <Badge bg={item.active ? 'success' : 'secondary'}>
-                  {item.active ? 'Activo' : 'Inactivo'}
+                  {item.active ? 'Active' : 'Inactive'}
                 </Badge>
               </td>
               <td className="table-inventory-admin__actions-cell">
@@ -44,8 +44,8 @@ export function TableInventoryAdmin(props) {
                     type="button"
                     variant="warning"
                     size="sm"
-                    title="Editar inventario"
-                    aria-label={`Editar ${item.product_data?.title || 'producto'}`}
+                    title="Edit inventory"
+                    aria-label={`Edit ${item.product_data?.title || 'product'}`}
                     onClick={() => onEdit(item)}
                   >
                     <FaEdit />
@@ -54,8 +54,8 @@ export function TableInventoryAdmin(props) {
                     type="button"
                     variant="success"
                     size="sm"
-                    title="Reponer stock"
-                    aria-label={`Reponer ${item.product_data?.title || 'producto'}`}
+                    title="Restock"
+                    aria-label={`Restock ${item.product_data?.title || 'product'}`}
                     onClick={() => onRestock(item)}
                   >
                     <FaPlus />
@@ -66,7 +66,7 @@ export function TableInventoryAdmin(props) {
           ))
         ) : (
           <tr>
-            <td colSpan="5">No hay productos registrados en esta sede.</td>
+            <td colSpan="5">No products are registered at this branch.</td>
           </tr>
         )}
       </tbody>

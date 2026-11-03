@@ -104,19 +104,19 @@ export function TableDetailsAdmin() {
   return (
     <>
       <HeaderPage
-        title={`Mesa ${id || ''}`}
-        btnTitle={paymentData ? 'Ver cuenta' : 'Añadir pedido'}
+        title={`Table ${id || ''}`}
+        btnTitle={paymentData ? 'View bill' : 'Add order'}
         btnClick={openCloseModal}
-        btnTitleTwo={!paymentData ? 'Generar cuenta' : null}
+        btnTitleTwo={!paymentData ? 'Generate bill' : null}
         btnClickTwo={() => setShowPaymentConfirmation(true)}
-        btnTitleThree={'Volver a pedidos'}
+        btnTitleThree={'Back to orders'}
         btnClickThree={() => window.history.back()}
       />
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <ListOrderAdmin orders={orders} onReloadOrders={onReloadOrders} />
@@ -125,7 +125,7 @@ export function TableDetailsAdmin() {
       <ModalBasic
         show={showModal}
         onClose={openCloseModal}
-        title={paymentData ? 'Detalle de cuenta' : 'Generar pedido'}
+        title={paymentData ? 'Bill details' : 'Create order'}
         size="large"
       >
         {paymentData ? (
@@ -145,27 +145,27 @@ export function TableDetailsAdmin() {
       </ModalBasic>
 
       <ModalConfirm
-        title="Generar cuenta"
-        message="¿Estás seguro de generar la cuenta de la mesa?"
+        title="Generate bill"
+        message="Are you sure you want to generate the bill for this table?"
         show={showPaymentConfirmation}
         onClose={() => setShowPaymentConfirmation(false)}
-        onCloseText="Cancelar"
+        onCloseText="Cancel"
         onCloseVariant="outline-secondary"
         onConfirm={confirmPaymentCreation}
-        onConfirmText="Continuar"
+        onConfirmText="Continue"
         onConfirmVariant="primary"
       />
 
       <ModalConfirm
-        title="Método de pago"
-        message="¿Cómo deseas pagar la cuenta de la mesa?"
+        title="Payment method"
+        message="How would you like to pay the bill?"
         show={showPaymentMethod}
         onClose={() => setShowPaymentMethod(false)}
         onCancel={() => onCreatePayment(PAYMENT_TYPE.CASH)}
-        onCloseText="Efectivo"
+        onCloseText="Cash"
         onCloseVariant="outline-primary"
         onConfirm={() => onCreatePayment(PAYMENT_TYPE.CARD)}
-        onConfirmText="Tarjeta"
+        onConfirmText="Card"
         onConfirmVariant="primary"
       />
     </>

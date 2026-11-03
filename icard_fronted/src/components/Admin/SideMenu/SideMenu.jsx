@@ -42,7 +42,7 @@ function MenuLeft() {
           }
         >
           <FaHome />
-          <span>Pedidos</span>
+          <span>Orders</span>
         </NavLink>
 
         <NavLink
@@ -54,7 +54,7 @@ function MenuLeft() {
           }
         >
           <FaTable />
-          <span>Mesas</span>
+          <span>Tables</span>
         </NavLink>
 
         <NavLink
@@ -66,7 +66,7 @@ function MenuLeft() {
           }
         >
           <FaHistory />
-          <span>Historial de pagos</span>
+          <span>Payment history</span>
         </NavLink>
 
         <NavLink
@@ -78,7 +78,7 @@ function MenuLeft() {
           }
         >
           <FaFolder />
-          <span>Categorías</span>
+          <span>Categories</span>
         </NavLink>
 
         <NavLink
@@ -90,7 +90,7 @@ function MenuLeft() {
           }
         >
           <FaShoppingCart />
-          <span>Productos</span>
+          <span>Products</span>
         </NavLink>
 
         <NavLink
@@ -102,7 +102,7 @@ function MenuLeft() {
           }
         >
           <FaBoxes />
-          <span>Inventario</span>
+          <span>Inventory</span>
         </NavLink>
 
         {auth?.me?.retData?.is_staff && (
@@ -115,7 +115,7 @@ function MenuLeft() {
             }
           >
             <FaUsers />
-            <span>Usuarios</span>
+            <span>Users</span>
           </NavLink>
         )}
       </Nav>

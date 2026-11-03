@@ -20,18 +20,18 @@ export function Products() {
 
   return (
     <div>
-      <Link to={`/client/${idTable}`}>Volver a categorías</Link>
+      <Link to={`/client/${idTable}`}>Back to categories</Link>
 
       {error && (
         <Alert variant="danger" className="mt-3">
-          No fue posible cargar los productos disponibles.
+          Unable to load available products.
         </Alert>
       )}
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <ListProducts products={products} />

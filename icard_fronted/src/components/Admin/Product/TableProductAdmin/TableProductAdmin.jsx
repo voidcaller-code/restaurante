@@ -17,12 +17,12 @@ export function TableProductAdmin(props) {
       <thead className="text-center">
         <tr>
           <th className="table-product-admin__id-cell">ID</th>
-          <th className="table-product-admin__image-cell">Imagen</th>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th>Categoría</th>
-          <th>Activo</th>
-          <th className="table-product-admin__actions-cell">Acciones</th>
+          <th className="table-product-admin__image-cell">Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Active</th>
+          <th className="table-product-admin__actions-cell">Actions</th>
         </tr>
       </thead>
 
@@ -40,13 +40,13 @@ export function TableProductAdmin(props) {
                     thumbnail
                   />
                 ) : (
-                  <span>Sin imagen</span>
+                  <span>No image</span>
                 )}
               </td>
 
               <td>{product.title}</td>
               <td>{product.price} $</td>
-              <td>{product.category_data?.title || 'Sin categoría'}</td>
+              <td>{product.category_data?.title || 'No category'}</td>
 
               <td>
                 {product.active ? (
@@ -68,7 +68,7 @@ export function TableProductAdmin(props) {
         ) : (
           <tr>
             <td colSpan="6" className="text-center">
-              No hay productos registrados.
+              No products are registered.
             </td>
           </tr>
         )}

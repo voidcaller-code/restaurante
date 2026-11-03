@@ -56,12 +56,12 @@ export function AddEditCategoryForm(props) {
   return (
     <Form className="add-edit-category-form" onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
-        <Form.Label>Nombre de la categoría</Form.Label>
+        <Form.Label>Category name</Form.Label>
 
         <Form.Control
           name="title"
           type="text"
-          placeholder="Nombre de la categoría"
+          placeholder="Category name"
           value={formik.values.title}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.title)}
@@ -73,7 +73,7 @@ export function AddEditCategoryForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Imagen</Form.Label>
+        <Form.Label>Image</Form.Label>
 
         <div
           {...getRootProps()}
@@ -84,7 +84,7 @@ export function AddEditCategoryForm(props) {
           <input {...getInputProps()} />
 
           <Button type="button" variant={formik.errors.image ? 'danger' : 'outline-primary'}>
-            {previewImage ? 'Cambiar imagen' : 'Subir imagen'}
+            {previewImage ? 'Change image' : 'Upload image'}
           </Button>
         </div>
 
@@ -97,7 +97,7 @@ export function AddEditCategoryForm(props) {
         {previewImage && (
           <Image
             src={previewImage}
-            alt="Vista previa de categoría"
+            alt="Category preview"
             fluid
             thumbnail
             className="add-edit-category-form__image d-block mx-auto mt-3"
@@ -106,7 +106,7 @@ export function AddEditCategoryForm(props) {
       </Form.Group>
 
       <Button type="submit" variant="primary" className="w-100 mt-4">
-        {category ? 'Actualizar' : 'Crear'}
+        {category ? 'Update' : 'Create'}
       </Button>
     </Form>
   )
@@ -121,14 +121,14 @@ function initialValues(data) {
 
 function newSchema() {
   return Yup.object({
-    title: Yup.string().required('El nombre de la categoría es obligatorio'),
-    image: Yup.mixed().required('La imagen es obligatoria'),
+    title: Yup.string().required('Category name is required'),
+    image: Yup.mixed().required('Image is required'),
   })
 }
 
 function updateSchema() {
   return Yup.object({
-    title: Yup.string().required('El nombre de la categoría es obligatorio'),
+    title: Yup.string().required('Category name is required'),
     image: Yup.mixed().nullable(),
   })
 }

@@ -13,12 +13,12 @@ export function Categories() {
 
   return (
     <div>
-      <h3>Categorías</h3>
+      <h3>Categories</h3>
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <ListCategories categories={categories} />

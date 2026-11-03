@@ -87,17 +87,17 @@ export function TableAdmin(props) {
 
       {pendingPayment && (
         <Badge bg="success" pill className="table-admin__badge table-admin__badge--payment">
-          Cuenta
+          Bill
         </Badge>
       )}
 
       <MdTableBar
         role="img"
-        aria-label={`Mesa ${table.id}`}
+        aria-label={`Table ${table.id}`}
         className={iconClassName}
       />
 
-      <p>Mesa {table.id}</p>
+      <p>Table {table.id}</p>
     </Link>
   )
 }

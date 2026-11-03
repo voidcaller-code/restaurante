@@ -39,7 +39,7 @@ export function TablesListAdmin(props) {
         <Form.Check
           type="switch"
           id="auto-reload"
-          label="Reload automático"
+          label="Auto refresh"
           checked={autoReload}
           onChange={(event) => setAutoReload(event.target.checked)}
         />
@@ -51,7 +51,7 @@ export function TablesListAdmin(props) {
             <TableAdmin key={table.id} table={table} reload={reload} />
           ))
         ) : (
-          <p className="text-muted">No hay mesas registradas.</p>
+          <p className="text-muted">No tables are registered.</p>
         )}
       </div>
     </div>

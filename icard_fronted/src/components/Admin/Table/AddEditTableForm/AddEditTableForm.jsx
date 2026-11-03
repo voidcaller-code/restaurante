@@ -36,7 +36,7 @@ export function AddEditTableForm(props) {
   return (
     <Form className="add-edit-table-form" onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
-        <Form.Label>Tipo de mesa</Form.Label>
+        <Form.Label>Table type</Form.Label>
 
         <Form.Select
           name="tipo"
@@ -44,9 +44,9 @@ export function AddEditTableForm(props) {
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.tipo)}
         >
-          <option value="">Selecciona un tipo de mesa</option>
-          <option value="NI">Niños</option>
-          <option value="ES">Estándar</option>
+          <option value="">Select a table type</option>
+          <option value="NI">Children</option>
+          <option value="ES">Standard</option>
           <option value="VIP">VIP</option>
         </Form.Select>
 
@@ -56,7 +56,7 @@ export function AddEditTableForm(props) {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Capacidad</Form.Label>
+        <Form.Label>Capacity</Form.Label>
 
         <Form.Control
           name="capacity"
@@ -64,7 +64,7 @@ export function AddEditTableForm(props) {
           min="1"
           max="10"
           step="1"
-          placeholder="Cantidad de personas"
+          placeholder="Number of people"
           value={formik.values.capacity}
           onChange={formik.handleChange}
           isInvalid={Boolean(formik.errors.capacity)}
@@ -76,7 +76,7 @@ export function AddEditTableForm(props) {
       </Form.Group>
 
       <Button type="submit" variant="primary" className="w-100">
-        {table ? 'Actualizar' : 'Crear'}
+        {table ? 'Update' : 'Create'}
       </Button>
     </Form>
   )
@@ -92,13 +92,13 @@ function initialValues(data) {
 function validationSchema() {
   return Yup.object({
     tipo: Yup.string()
-      .oneOf(['NI', 'ES', 'VIP'], 'Selecciona un tipo de mesa válido')
-      .required('El tipo de mesa es obligatorio'),
+      .oneOf(['NI', 'ES', 'VIP'], 'Select a valid table type')
+      .required('Table type is required'),
     capacity: Yup.number()
-      .typeError('La capacidad debe ser un número')
-      .integer('La capacidad debe ser un número entero')
-      .min(1, 'La capacidad debe ser mayor que cero')
-      .max(10, 'La capacidad no puede ser mayor que 10')
-      .required('La capacidad es obligatoria'),
+      .typeError('Capacity must be a number')
+      .integer('Capacity must be an integer')
+      .min(1, 'Capacity must be greater than zero')
+      .max(10, 'Capacity cannot be greater than 10')
+      .required('Capacity is required'),
   })
 }

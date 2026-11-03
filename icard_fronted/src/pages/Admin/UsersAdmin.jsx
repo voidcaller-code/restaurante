@@ -24,7 +24,7 @@ export function UsersAdmin() {
   const onRefetch = () => setRefetch((prev) => !prev)
 
   const addUser = () => {
-    setTitleModal('Nuevo usuario')
+    setTitleModal('New user')
     setContentModal(
       <AddEditUserForm onClose={openCloseModal} onRefetch={onRefetch} />
     )
@@ -32,7 +32,7 @@ export function UsersAdmin() {
   }
 
   const updateUser = (data) => {
-    setTitleModal('Actualizar usuario')
+    setTitleModal('Update user')
     setContentModal(
       <AddEditUserForm
         onClose={openCloseModal}
@@ -44,7 +44,7 @@ export function UsersAdmin() {
   }
 
   const onDeleteUser = async (data) => {
-    const result = window.confirm(`¿Eliminar usuario ${data.email}?`)
+    const result = window.confirm(`Delete user ${data.email}?`)
 
     if (result) {
       try {
@@ -59,15 +59,15 @@ export function UsersAdmin() {
   return (
     <>
       <HeaderPage
-        title="Usuarios"
-        btnTitle="Nuevo usuario"
+        title="Users"
+        btnTitle="New user"
         btnClick={addUser}
       />
 
       {loading ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : (
         <TableUsers

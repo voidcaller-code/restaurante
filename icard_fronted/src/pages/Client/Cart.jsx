@@ -37,19 +37,19 @@ export function Cart() {
 
   return (
     <div>
-      <h1>Carrito</h1>
+      <h1>Cart</h1>
 
       {!products ? (
         <div className="text-center my-4">
           <Spinner animation="border" />
-          <p className="mt-2">Cargando...</p>
+          <p className="mt-2">Loading...</p>
         </div>
       ) : products.length === 0 ? (
         <div className="text-center">
-          <p>Tu carrito está vacío</p>
+          <p>Your cart is empty</p>
 
           <Link to={`/client/${idTable}/orders`}>
-            <Button variant="primary">Ver pedidos</Button>
+            <Button variant="primary">View orders</Button>
           </Link>
         </div>
       ) : (

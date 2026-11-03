@@ -25,7 +25,7 @@ export function TablePayments(props) {
   }
 
   const showDetails = (payment) => {
-    setTitleModal(`Pedidos de la mesa ${payment.table_data?.id || ''}`)
+    setTitleModal(`Orders for table ${payment.table_data?.id || ''}`)
     setContentModal(<PaymentProductList payment={payment} />)
     openCloseModal()
   }
@@ -41,11 +41,11 @@ export function TablePayments(props) {
       >
         <thead className="text-center">
           <tr>
-            <th>ID Mesa</th>
+            <th>Table ID</th>
             <th>Total</th>
-            <th>Tipo de pago</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
+            <th>Payment method</th>
+            <th>Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
@@ -72,7 +72,7 @@ export function TablePayments(props) {
           ) : (
             <tr>
               <td colSpan="5">
-                No hay pagos registrados.
+                No payments are registered.
               </td>
             </tr>
           )}
@@ -94,7 +94,7 @@ export function TablePayments(props) {
 function formatDate(date) {
   if (!date) return ''
 
-  return new Intl.DateTimeFormat('es-CO', {
+  return new Intl.DateTimeFormat('en-US', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
