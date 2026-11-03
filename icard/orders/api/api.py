@@ -5,10 +5,22 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 
 class OrderApiViewSet(BaseModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.select_related(
+        'table',
+        'table__branch',
+        'product',
+        'product__category',
+        'payment',
+    ).all()
     serializer_class = OrderSerializer
 
     filter_backends = [DjangoFilterBackend, OrderingFilter] 
-    filterset_fields = ['table', 'status', 'payment','close']
+    filterset_fields = [
+        'table',
+        'table__branch',
+        'status',
+        'payment',
+        'close',
+    ]
 
     ordering_fields = '__all__' # Ordenar por todos los campos

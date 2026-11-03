@@ -2,12 +2,19 @@ import { BASE_API, ORDER_STATUS } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function getOrdersByTableApi(idTable, status = "", ordering = "") {
-  const tableFilter = `table=${idTable}`;
-  const statusFilter = `status=${status}`;
-  const closeFilter = "close=False";
-  const cacheBuster = `_=${Date.now()}`;
+  const params = new URLSearchParams({
+    table: String(idTable),
+    close: "False",
+    page_size: "100",
+    _: String(Date.now()),
+  });
 
-  const url = `${BASE_API}/api/v1/orders/?${tableFilter}&${statusFilter}&${closeFilter}&${ordering}&${cacheBuster}`;
+  if (status) params.set("status", status);
+  if (ordering) {
+    params.set("ordering", ordering.replace(/^ordering=/, ""));
+  }
+
+  const url = `${BASE_API}/api/v1/orders/?${params}`;
 
   return apiFetch(url, { cache: "no-store" });
 }
@@ -71,8 +78,11 @@ export async function closeOrderApi(idOrder) {
 }
 
 export async function getOrdersByPaymentApi(idPayment) {
-  const paymentFilter = `payment=${idPayment}`;
-  const url = `${BASE_API}/api/v1/orders/?${paymentFilter}`;
+  const params = new URLSearchParams({
+    payment: String(idPayment),
+    page_size: "100",
+  });
+  const url = `${BASE_API}/api/v1/orders/?${params}`;
 
-  return apiFetch(url);
+  return apiFetch(url, { cache: "no-store" });
 }

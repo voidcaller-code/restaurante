@@ -2,8 +2,11 @@ import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
 export async function getTablesApi(token, branchId) {
-  const branchFilter = branchId ? `?branch=${branchId}` : "";
-  const url = `${BASE_API}/api/v1/tables/${branchFilter}`;
+  const params = new URLSearchParams({ page_size: "100" });
+
+  if (branchId) params.set("branch", String(branchId));
+
+  const url = `${BASE_API}/api/v1/tables/?${params}`;
 
   return apiFetch(url, {
     headers: {

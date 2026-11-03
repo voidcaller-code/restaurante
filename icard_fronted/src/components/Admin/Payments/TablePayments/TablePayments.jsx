@@ -53,7 +53,7 @@ export function TablePayments(props) {
           {payments.length > 0 ? (
             payments.map((payment) => (
               <tr key={payment.id}>
-                <td>{payment.id}</td>
+                <td>{payment.table_data?.id || payment.table || '-'}</td>
                 <td>{payment.totalPayment} $</td>
                 <td>{getPaymentTypeIcon(payment.paymentType)}</td>
                 <td>{formatDate(payment.created_at)}</td>

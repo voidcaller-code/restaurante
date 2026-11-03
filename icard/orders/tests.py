@@ -86,3 +86,41 @@ class OrderStockTests(TestCase):
 
         other_inventory.refresh_from_db()
         self.assertEqual(other_inventory.stock, 5)
+
+
+class OrderBranchFilterTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.branch = Branch.objects.create(name='Sede principal')
+        self.other_branch = Branch.objects.create(name='Otra sede')
+        self.table = Table.objects.create(capacity=4, branch=self.branch)
+        self.other_table = Table.objects.create(
+            capacity=4,
+            branch=self.other_branch,
+        )
+        self.product = Product.objects.create(
+            title='Producto de prueba',
+            price=10000,
+            active=True,
+        )
+
+    def test_orders_can_be_filtered_by_table_branch(self):
+        expected_order = Order.objects.create(
+            table=self.table,
+            product=self.product,
+        )
+        Order.objects.create(
+            table=self.other_table,
+            product=self.product,
+        )
+
+        response = self.client.get(
+            '/api/v1/orders/',
+            {'table__branch': self.branch.id, 'page_size': 100},
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            [order['id'] for order in response.data['retData']],
+            [expected_order.id],
+        )

@@ -5,7 +5,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 
 class PaymentApiViewSet(BaseModelViewSet):
-    queryset = Payment.objects.all()
+    queryset = Payment.objects.select_related(
+        'table',
+        'table__branch',
+    ).all()
     serializer_class = PaymentSerializer
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
