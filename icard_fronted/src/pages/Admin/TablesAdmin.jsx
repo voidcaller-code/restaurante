@@ -6,7 +6,7 @@ import {
   AddEditTableForm,
 } from '../../components/Admin'
 import { ModalBasic } from '../../components/Common'
-import { useTable } from '../../hooks'
+import { useBranch, useTable } from '../../hooks'
 
 export function TablesAdmin() {
   const [showModal, setShowModal] = useState(false)
@@ -15,10 +15,13 @@ export function TablesAdmin() {
   const [refetch, setRefetch] = useState(false)
 
   const { loading, tables, getTables, deleteTable } = useTable()
+  const { selectedBranch } = useBranch()
 
   useEffect(() => {
-    getTables()
-  }, [refetch])
+    if (!selectedBranch) return
+
+    getTables(selectedBranch.id)
+  }, [refetch, selectedBranch, getTables])
 
   const openCloseModal = () => setShowModal((prev) => !prev)
   const onRefetch = () => setRefetch((prev) => !prev)
@@ -26,7 +29,11 @@ export function TablesAdmin() {
   const addTable = () => {
     setTitleModal('Crear mesa')
     setContentModal(
-      <AddEditTableForm onClose={openCloseModal} onRefetch={onRefetch} />
+      <AddEditTableForm
+        onClose={openCloseModal}
+        onRefetch={onRefetch}
+        branchId={selectedBranch?.id}
+      />
     )
     openCloseModal()
   }
@@ -55,8 +62,8 @@ export function TablesAdmin() {
   return (
     <>
       <HeaderPage
-        title="Mesas"
-        btnTitle="Crear nueva mesa"
+        title={`Mesas${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
+        btnTitle={selectedBranch ? 'Crear nueva mesa' : null}
         btnClick={addTable}
       />
 

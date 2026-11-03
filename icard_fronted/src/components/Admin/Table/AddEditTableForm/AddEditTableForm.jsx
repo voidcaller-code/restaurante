@@ -7,7 +7,7 @@ import { useTable } from '../../../../hooks'
 import './AddEditTableForm.scss'
 
 export function AddEditTableForm(props) {
-  const { onClose, onRefetch, table } = props
+  const { onClose, onRefetch, table, branchId } = props
   const { addTable, updateTable } = useTable()
 
   const formik = useFormik({
@@ -19,7 +19,10 @@ export function AddEditTableForm(props) {
         if (table) {
           await updateTable(table.id, formValue)
         } else {
-          await addTable(formValue)
+          await addTable({
+            ...formValue,
+            branch: branchId,
+          })
         }
 
         onRefetch()

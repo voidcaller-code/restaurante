@@ -1,18 +1,25 @@
 import { useEffect } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { HeaderPage, TablePayments } from '../../components/Admin'
-import { usePayment } from '../../hooks'
+import { useBranch, usePayment } from '../../hooks'
 
 export function PaymentsHistory() {
   const { loading, payments, getPayments } = usePayment()
+  const { selectedBranch } = useBranch()
 
   useEffect(() => {
-    getPayments()
-  }, [])
+    if (!selectedBranch) return
+
+    getPayments(selectedBranch.id)
+  }, [selectedBranch, getPayments])
 
   return (
     <>
-      <HeaderPage title="Historial de pagos" />
+      <HeaderPage
+        title={`Historial de pagos${
+          selectedBranch ? ` - ${selectedBranch.name}` : ''
+        }`}
+      />
 
       {loading ? (
         <div className="text-center my-4">

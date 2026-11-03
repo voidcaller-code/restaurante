@@ -1,8 +1,9 @@
 import { BASE_API } from "../utils/constants";
 import { apiFetch } from "./apiFetch";
 
-export async function getTablesApi(token) {
-  const url = `${BASE_API}/api/v1/tables/`;
+export async function getTablesApi(token, branchId) {
+  const branchFilter = branchId ? `?branch=${branchId}` : "";
+  const url = `${BASE_API}/api/v1/tables/${branchFilter}`;
 
   return apiFetch(url, {
     headers: {

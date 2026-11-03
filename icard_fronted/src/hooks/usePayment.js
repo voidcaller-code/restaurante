@@ -39,17 +39,17 @@ export function usePayment() {
     }
   };
 
-  const getPayments = async () => {
+  const getPayments = useCallback(async (branchId) => {
     try {
       setLoading(true);
-      const response = await getPaymentsApi();
+      const response = await getPaymentsApi(branchId);
       setPayments(response?.retData ?? []);
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     error,

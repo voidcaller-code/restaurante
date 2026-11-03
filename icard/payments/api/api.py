@@ -9,6 +9,6 @@ class PaymentApiViewSet(BaseModelViewSet):
     serializer_class = PaymentSerializer
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ['table', 'statusPayment']
+    filterset_fields = ['table', 'table__branch', 'statusPayment']
 
     ordering_fields = '__all__' # Ordenar por todos los campos

@@ -19,6 +19,12 @@ class Table(models.Model):
         default=TipoMesa.ESTANDAR
     )
 
+    branch = models.ForeignKey(
+        'branches.Branch',
+        on_delete=models.PROTECT,
+        related_name='tables',
+    )
+
     def __str__(self):
         return f"Mesa {self.id} - {self.get_tipo_display()} - Capacidad {self.capacity}"
 

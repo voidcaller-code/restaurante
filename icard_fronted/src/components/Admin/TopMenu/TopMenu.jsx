@@ -1,12 +1,18 @@
-import { Button, Navbar } from 'react-bootstrap'
+import { Button, Form, Navbar } from 'react-bootstrap'
 import { FaSignOutAlt } from 'react-icons/fa'
 
-import { useAuth } from '../../../hooks'
+import { useAuth, useBranch } from '../../../hooks'
 
 import './TopMenu.scss'
 
 export function TopMenu() {
   const { auth, logout } = useAuth()
+  const {
+    branches,
+    selectedBranch,
+    loadingBranches,
+    selectBranch,
+  } = useBranch()
 
   const renderName = () => {
     if (auth?.me?.retData?.first_name && auth?.me?.retData?.last_name) {
@@ -23,6 +29,26 @@ export function TopMenu() {
       </div>
 
       <div className="top-menu-admin__right">
+        <div className="top-menu-admin__branch">
+          <Form.Label htmlFor="admin-branch-select">Sede</Form.Label>
+          <Form.Select
+            id="admin-branch-select"
+            size="sm"
+            value={selectedBranch?.id ?? ''}
+            onChange={(event) => selectBranch(event.target.value)}
+            disabled={loadingBranches || branches.length === 0}
+          >
+            {branches.length === 0 && (
+              <option value="">Sin sedes disponibles</option>
+            )}
+            {branches.map((branch) => (
+              <option key={branch.id} value={branch.id}>
+                {branch.name}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+
         <span>Hola, {renderName()}</span>
 
         <Button

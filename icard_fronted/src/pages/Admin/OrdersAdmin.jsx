@@ -1,18 +1,23 @@
 import { useEffect } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { HeaderPage, TablesListAdmin } from '../../components/Admin'
-import { useTable } from '../../hooks'
+import { useBranch, useTable } from '../../hooks'
 
 export function OrdersAdmin() {
   const { loading, tables, getTables } = useTable()
+  const { selectedBranch } = useBranch()
 
   useEffect(() => {
-    getTables()
-  }, [])
+    if (!selectedBranch) return
+
+    getTables(selectedBranch.id)
+  }, [selectedBranch, getTables])
 
   return (
     <>
-      <HeaderPage title="Restaurante" />
+      <HeaderPage
+        title={`Pedidos${selectedBranch ? ` - ${selectedBranch.name}` : ''}`}
+      />
 
       {loading ? (
         <div className="text-center my-4">

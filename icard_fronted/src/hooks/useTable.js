@@ -12,22 +12,22 @@ import { useAuth } from "./useAuth";
 export function useTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tables, setTables] = useState([]); // guardas las mesas que obtienes de la API
+  const [tables, setTables] = useState([]);
   const [table, setTable] = useState(null);
 
   const { auth } = useAuth();
 
-  const getTables = async () => {
+  const getTables = useCallback(async (branchId) => {
     try {
       setLoading(true);
-      const response = await getTablesApi(auth?.token);
+      const response = await getTablesApi(auth?.token, branchId);
       setTables(response);
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [auth]);
 
   const addTable = async (data) => {
     try {

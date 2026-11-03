@@ -1,12 +1,15 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from tables.models  import Table
+from branches.api.serializers import BranchSerializer
 
 class TableSerializer(ModelSerializer):
     tipo_display = serializers.CharField(
         source='get_tipo_display',
         read_only=True
     )
+
+    branch_data = BranchSerializer(source='branch', read_only=True)
 
     class Meta:
         model = Table
@@ -15,4 +18,6 @@ class TableSerializer(ModelSerializer):
             'capacity',
             'tipo',
             'tipo_display',
+            'branch',
+            'branch_data',
         ]

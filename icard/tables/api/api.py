@@ -11,4 +11,4 @@ class TableApiViewSet(BaseModelViewSet):
     serializer_class = TableSerializer
 
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['id', 'tipo']
+    filterset_fields = ['id', 'tipo', 'branch']

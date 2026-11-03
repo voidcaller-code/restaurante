@@ -36,4 +36,21 @@
       justify-content: center;
     }
   }
+
+  &__branch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    select {
+      width: 180px;
+    }
+  }
 }

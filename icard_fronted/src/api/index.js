@@ -7,3 +7,4 @@ export * from "./table";
 export * from "./token";
 export * from "./user";
 export * from "./apiFetch";
+export * from "./branch";

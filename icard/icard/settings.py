@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tables',
     'orders',
     'payments',
+    'branches',
 ]
 
 MIDDLEWARE = [

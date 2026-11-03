@@ -42,11 +42,12 @@ export async function closePaymentApi(idPayment) {
   });
 }
 
-export async function getPaymentsApi() {
+export async function getPaymentsApi(branchId) {
   const paymentFilter = `statusPayment=${PAYMENT_STATUS.PAID}`;
   const orderingFilter = "ordering=created_at";
+  const branchFilter = branchId ? `table__branch=${branchId}` : "";
 
-  const url = `${BASE_API}/api/v1/payments/?${paymentFilter}&${orderingFilter}`;
+  const url = `${BASE_API}/api/v1/payments/?${paymentFilter}&${orderingFilter}&${branchFilter}`;
 
   return apiFetch(url);
 }
