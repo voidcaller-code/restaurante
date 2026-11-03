@@ -1,8 +1,8 @@
-import { Button, Image } from 'react-bootstrap'
+import { Badge, Button, Image } from 'react-bootstrap'
 import { FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 
-import { addProductCart } from '../../../api/cart'
+import { addProductCart, getProductsCart } from '../../../api/cart'
 
 import './ListProducts.scss'
 
@@ -10,6 +10,15 @@ export function ListProducts(props) {
   const { products = [] } = props
 
   const addCart = (product) => {
+    const quantityInCart = getProductsCart().filter(
+      (productId) => Number(productId) === product.id,
+    ).length
+
+    if (quantityInCart >= product.stock) {
+      toast.warning(`Solo hay ${product.stock} unidades disponibles`)
+      return
+    }
+
     addProductCart(product.id)
     toast.success(`${product.title} añadido al carrito`)
   }
@@ -28,7 +37,12 @@ export function ListProducts(props) {
                 />
               )}
 
-              <span>{product.title}</span>
+              <div className="list-products-client__details">
+                <span>{product.title}</span>
+                <Badge bg="light" text="dark">
+                  Disponibles: {product.stock}
+                </Badge>
+              </div>
             </div>
 
             <Button

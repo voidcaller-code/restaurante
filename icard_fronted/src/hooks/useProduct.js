@@ -6,6 +6,7 @@ import {
   deleteProductApi,
   getProductByIdApi,
   getProductsByCategoryApi,
+  getAvailableProductsByCategoryApi,
 } from "../api/product";
 import { useAuth } from "./useAuth";
 
@@ -85,6 +86,33 @@ export function useProduct() {
     }
   };
 
+  const getAvailableProductsByCategory = useCallback(async (
+    idTable,
+    idCategory,
+  ) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await getAvailableProductsByCategoryApi(
+        idTable,
+        idCategory,
+      );
+      const inventory = response?.retData ?? [];
+      setProducts(
+        inventory.map((item) => ({
+          ...item.product_data,
+          stock: item.stock,
+        })),
+      );
+    } catch (requestError) {
+      setError(requestError);
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return {
     loading,
     error,
@@ -95,5 +123,6 @@ export function useProduct() {
     deleteProduct,
     getProductById,
     getProductsByCategory,
+    getAvailableProductsByCategory,
   };
 }

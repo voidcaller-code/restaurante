@@ -1,21 +1,32 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router'
-import { Spinner } from 'react-bootstrap'
+import { Alert, Spinner } from 'react-bootstrap'
 
 import { useProduct } from '../../hooks'
 import { ListProducts } from '../../components/Client'
 
 export function Products() {
   const { idTable, idCategory } = useParams()
-  const { loading, products, getProductsByCategory } = useProduct()
+  const {
+    loading,
+    error,
+    products,
+    getAvailableProductsByCategory,
+  } = useProduct()
 
   useEffect(() => {
-    getProductsByCategory(idCategory)
-  }, [idCategory])
+    getAvailableProductsByCategory(idTable, idCategory)
+  }, [getAvailableProductsByCategory, idCategory, idTable])
 
   return (
     <div>
       <Link to={`/client/${idTable}`}>Volver a categorías</Link>
+
+      {error && (
+        <Alert variant="danger" className="mt-3">
+          No fue posible cargar los productos disponibles.
+        </Alert>
+      )}
 
       {loading ? (
         <div className="text-center my-4">

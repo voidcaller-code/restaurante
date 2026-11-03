@@ -75,3 +75,15 @@ export async function getProductsByCategoryApi(idCategory) {
 
   return apiFetch(url);
 }
+
+export async function getAvailableProductsByCategoryApi(idTable, idCategory) {
+  const params = new URLSearchParams({
+    table: String(idTable),
+    product__category: String(idCategory),
+    available: 'true',
+    page_size: '100',
+  });
+  const url = `${BASE_API}/api/v1/branch-products/?${params}`;
+
+  return apiFetch(url, { cache: 'no-store' });
+}
